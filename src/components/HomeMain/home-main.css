@@ -1,22 +1,11 @@
-/* RESET  */
-h1{
-    padding:0px;
-    margin:0px;
-}
-
 .home-main{
-    width:100vw;
-    height:100vh;
+    display:grid;
+    grid-template-columns:1fr 2fr 1fr;
+overflow:hidden;
 }
-.home-main__child{
-    width:80vw;
-    height:60vh;
-    background-color:white;
-    border-radius:3rem;
-    justify-content: space-between;
-    box-shadow: 1px 1px 8px 3px whitesmoke;
-
+.main{
+    overflow-y:scroll;
 }
-.home-main__child--heading{
-    width:30ch;
+.right-sidebar{
+    overflow-y:scroll;
 }

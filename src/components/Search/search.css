@@ -1,0 +1,13 @@
+.note-search{
+    background-color: white;
+    width:38vw;
+    border-radius:10px
+}
+.note-search__input{
+    height:3.5rem;
+    width:33vw;
+    border:none;
+}
+.note-search__input:focus{
+    outline:none
+}

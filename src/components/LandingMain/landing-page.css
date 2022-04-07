@@ -1,0 +1,22 @@
+/* RESET  */
+h1{
+    padding:0px;
+    margin:0px;
+}
+
+.landing-main{
+    width:100vw;
+    height:100vh;
+}
+.landing-main__child{
+    width:80vw;
+    height:60vh;
+    background-color:white;
+    border-radius:3rem;
+    justify-content: space-between;
+    box-shadow: 1px 1px 8px 3px whitesmoke;
+
+}
+.landing-main__child--heading{
+    width:30ch;
+}

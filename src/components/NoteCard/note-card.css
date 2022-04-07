@@ -1,0 +1,49 @@
+/* Note Card  */
+.note-card{
+    background-color: white;
+    width:35vw;
+}
+/* Note Iput fields  */
+.note-card__textarea,.note-card__heading{
+border: none;
+padding:1rem;
+}
+.note-card__textarea{
+    height:10rem;
+    resize:none;
+}
+.note-card__heading:focus{
+    outline:none
+}
+.note-card__textarea:focus{
+    outline:none;
+}
+ /* card footer  */
+ .note-card__footer{
+     align-items:center
+ }
+.note-card__footer--icons{
+    width:15rem
+}
+.note-card__footer--date{
+    color:grey;
+}
+.note-card-icon:hover{
+   color:var(--primary);
+   cursor:pointer;
+
+}
+/* card pin icon  */
+.card-pin-icon{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+.card-pin-icon:hover{
+    color:var(--primary);
+    cursor:pointer;
+ }
+
+ .pinned-card{
+     width:20vw
+ }
