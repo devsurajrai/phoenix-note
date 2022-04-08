@@ -1,0 +1,71 @@
+
+/* LOGIN PAGE  */
+.login-page {
+  display: grid;
+  grid-template-rows: minmax(10%, max-content) 96vh;
+  max-height: 100vh;
+
+}
+/* MAIN  */
+.login-main {
+  display: grid;
+  grid-template-rows: 1fr;
+  place-content: center;
+  place-items: center;
+  height:calc(100vh - 6rem)
+}
+/* FORM OF MAIN */
+
+/* login form  */
+.log-in-form {
+  width: 30vw;
+  max-height: 50rem;
+  background-color: white;
+  border-radius:1.5rem;
+}
+
+/* login form labels  */
+.login-label {
+  width: 100%;
+}
+/* input  */
+.input-simple:valid {
+  background-color: unset;
+  color:var(--color-text)
+}
+.input-simple:focus{
+  color: var(--color-text);
+}
+
+/* input checkbox  */
+.input-checkbox {
+  height: 2rem;
+  width: 2rem;
+}
+.input-checkbox:checked {
+  background-color: var(--secondary);
+}
+
+/* forget password reset link  */
+.forget-pass {
+  color: var(--secondary);
+}
+/* log-in-button  */
+.log-in-btn {
+  width: calc(100% + 2rem);
+  margin-left: 2rem;
+}
+.log-in-btn:hover {
+  opacity: 80%;
+}
+
+/* create account button  */
+
+.create-new-acc {
+  border: none;
+  background-color: var(--color-white);
+  color: var(--color-text);
+}
+.create-new-acc:hover {
+cursor: pointer;
+}
