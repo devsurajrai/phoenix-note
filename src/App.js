@@ -1,8 +1,7 @@
 import "./App.css";
-import { Header } from "./components/components";
+import { Header, MockmanAPI } from "./components/components";
 import { LandingPage, Home, Login, SignUp } from "./pages/pages";
 import { Routes, Route } from "react-router-dom";
-
 const App = () => {
   return (
     <div className="App">
@@ -12,6 +11,7 @@ const App = () => {
         <Route path="/login" element={<Login />}></Route>
         <Route path="/signup" element={<SignUp />}></Route>
         <Route path="/home" element={<Home />}></Route>
+        <Route path="/mockman" element={<MockmanAPI />}></Route>
       </Routes>
     </div>
   );

@@ -61,3 +61,9 @@ padding-top:10rem;
   background-color: var(--color-white);
   color: var(--color-text);
 }
+
+/* show password button  */
+.show-pass-btn{
+  background-color: white;
+  color:var(--secondary)
+}
