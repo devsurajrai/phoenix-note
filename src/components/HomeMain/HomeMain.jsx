@@ -8,7 +8,6 @@ const HomeMain = () => {
       <SideBar />
       <div className="main ">
         <Search />
-
         <NoteCard />
         <section>
           <h3>Your Notes</h3>
