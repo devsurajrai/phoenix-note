@@ -3,17 +3,19 @@ import { Link } from "react-router-dom";
 import { useShowPassword } from "../../customHooks/customHooks";
 import { useSignUpLoginValidateContext } from "../../contexts/signUpLoginValidationContext";
 import { loginUser } from "../../util/util";
+import { useAuthContext } from "../../contexts/authContext";
 
 const LoginMain = () => {
   const { signUpLoginValidationDispatch, signUpLoginValidationState } =
     useSignUpLoginValidateContext();
   const passInputType = useShowPassword();
-  c;
+  const { auth, setAuth } = useAuthContext();
+  console.log(auth);
   return (
     <main class="login-main">
       <form
         className="log-in-form p-xxl flex-c flex-center br-sm"
-        onSubmit={(e) => loginUser(e, signUpLoginValidationState)}
+        onSubmit={(e) => loginUser(e, signUpLoginValidationState, setAuth)}
       >
         <h3>Login</h3>
         <label className="text-sm lh-md login-label" for="username">

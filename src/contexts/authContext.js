@@ -5,11 +5,14 @@ const AuthContext = createContext({});
 const useAuthContext = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }) => {
-  const token = localStorage.getItem("userToken");
+  const localStorageDtata = JSON.parse(localStorage.getItem("userData"));
+  const token = localStorageDtata?.userToken;
   const isLoggedIn = token ? true : false;
+  const userData = localStorageDtata?.userInfo;
   const [auth, setAuth] = useState({
-    isLoggedIn: isLoggedIn,
-    token: token,
+    isLoggedIn,
+    token,
+    userData,
   });
 
   return (

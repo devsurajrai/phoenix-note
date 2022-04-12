@@ -4,18 +4,20 @@ import { Link } from "react-router-dom";
 import { useShowPassword } from "../../customHooks/customHooks";
 import { useSignUpLoginValidateContext } from "../../contexts/signUpLoginValidationContext";
 import { createUser } from "../../util/util";
+import { useAuthContext } from "../../contexts/authContext";
 
 export const SignUpMain = () => {
   const { signUpLoginValidationState, signUpLoginValidationDispatch } =
     useSignUpLoginValidateContext();
   const passInputType = useShowPassword();
-
+  const { auth, setAuth } = useAuthContext();
+  console.log(auth);
   return (
     <div className="signup-page">
       <main>
         <form
           className="log-in-form sign-up-form p-xxl flex-c flex-center br-sm"
-          onSubmit={(e) => createUser(e, signUpLoginValidationState)}
+          onSubmit={(e) => createUser(e, signUpLoginValidationState, setAuth)}
         >
           <h3>Signup</h3>
           <label className="text-sm lh-md login-label" for="firstName">
@@ -71,9 +73,6 @@ export const SignUpMain = () => {
             Password
             <input
               className="input-simple br-l m-b-s"
-              // type={
-              //   !signUpLoginValidationState.isPassHidden ? "text" : "password"
-              // }
               type={passInputType}
               placeholder="Enter Password"
               name="password"
