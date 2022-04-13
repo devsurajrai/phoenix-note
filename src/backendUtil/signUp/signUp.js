@@ -10,13 +10,7 @@ export const signUpUser = (signUpLoginValidationState, setAuth) => {
         email,
         password,
       });
-      // setting the auth state at the time of account creation
-      setAuth({
-        isLoggedIn: true,
-        token: signUpResponse.data.encodedToken,
-        userData: signUpResponse.data.createdUser,
-      });
-      // saving the userInfo in local storage for later use
+      // saving the userInfo in local storage for session persistance
       localStorage.setItem(
         "userData",
         JSON.stringify({

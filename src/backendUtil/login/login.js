@@ -10,21 +10,14 @@ export const login = (signUpLoginValidationState, setAuth) => {
         email,
         password,
       });
-      // setting the auth state when logging in
-      setAuth({
-        isLoggedIn: true,
-        token: loginResponse.data.encodedToken,
-        userData: loginResponse.data.foundUser,
-      });
-      // saving the logged in user data for user referance
+
+      // saving the logged in user data in local storage for session persistance
       localStorage.setItem(
         JSON.stringify("userData", {
           userToken: loginResponse.data.encodedToken,
           userInfo: loginResponse.data.foundUser,
         })
       );
-      localStorage.setItem("userToken");
-      localStorage.setItem("userData");
     } catch (error) {
       console.log("error logging in", error);
     }
