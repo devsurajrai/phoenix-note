@@ -1,4 +1,5 @@
 import axios from "axios";
+import { setAuthState } from "../../util/setAuthState/setAuthState";
 
 export const login = (signUpLoginValidationState, setAuth) => {
   const { firstName, lastName, email, password } = signUpLoginValidationState;
@@ -10,21 +11,10 @@ export const login = (signUpLoginValidationState, setAuth) => {
         email,
         password,
       });
-      // setting the auth state when logging in
-      setAuth({
-        isLoggedIn: true,
-        token: loginResponse.data.encodedToken,
-        userData: loginResponse.data.foundUser,
-      });
-      // saving the logged in user data for user referance
-      localStorage.setItem(
-        JSON.stringify("userData", {
-          userToken: loginResponse.data.encodedToken,
-          userInfo: loginResponse.data.foundUser,
-        })
-      );
-      localStorage.setItem("userToken");
-      localStorage.setItem("userData");
+      // setting the auth to context and the local storage
+      let userToken = loginResponse.data.encodedToken;
+      let userData = loginResponse.data.foundUser;
+      setAuthState(setAuth, userToken, userData);
     } catch (error) {
       console.log("error logging in", error);
     }

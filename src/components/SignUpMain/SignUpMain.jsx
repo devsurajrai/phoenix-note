@@ -1,5 +1,5 @@
 import "./signup-main.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { useShowPassword } from "../../customHooks/customHooks";
 import { useSignUpLoginValidateContext } from "../../contexts/signUpLoginValidationContext";
@@ -10,14 +10,17 @@ export const SignUpMain = () => {
   const { signUpLoginValidationState, signUpLoginValidationDispatch } =
     useSignUpLoginValidateContext();
   const passInputType = useShowPassword();
-  const { auth, setAuth } = useAuthContext();
-  console.log(auth);
+  const { setAuth } = useAuthContext();
+  const navigate = useNavigate();
+
   return (
     <div className="signup-page">
       <main>
         <form
           className="log-in-form sign-up-form p-xxl flex-c flex-center br-sm"
-          onSubmit={(e) => createUser(e, signUpLoginValidationState, setAuth)}
+          onSubmit={(e) =>
+            createUser(e, signUpLoginValidationState, setAuth, navigate)
+          }
         >
           <h3>Signup</h3>
           <label className="text-sm lh-md login-label" for="firstName">
