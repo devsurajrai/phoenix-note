@@ -1,0 +1,64 @@
+
+
+/* Display Note Card  */
+.display-notes-card{
+    background-color: white;
+    margin-top: 0;
+    height: 22vh;
+    width: 40vw;
+    cursor:pointer;
+}
+/* N\display note card body  */
+.display-notes-card__body,.display-notes-card__heading{
+padding:1rem;
+}
+.display-notes-card__body{
+    max-height:2vh;
+    overflow:hidden;
+    width:49vw;
+}
+#display-notes-card__body--content{
+    margin:0;
+    width:80%
+}
+
+
+/* display notes card footer  */
+.icons-container{
+    width:30rem;
+    margin-left:auto;
+    justify-content:flex-end;
+    align-items:center;
+}
+.display-notes-card__footer{
+    align-items:center
+
+}
+.display-notes-card__footer--icons{
+   width:15rem;
+   height:3rem;
+
+}
+.display-notes-card__footer--date{
+   color:grey;
+}
+.display-notes-card-icon:hover{
+  color:var(--primary);
+  cursor:pointer;
+
+}
+
+/* card pin icon  */
+.card-pin-icon{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+.card-pin-icon:hover{
+    color:var(--primary);
+    cursor:pointer;
+ }
+ .pinned-card{
+     width:20vw;
+     margin:1rem;
+ }

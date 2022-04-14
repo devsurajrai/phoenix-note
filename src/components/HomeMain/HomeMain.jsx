@@ -1,27 +1,69 @@
 import "./home-main.css";
 import { SideBar } from "../SideBar/SideBar";
-import { NoteCard } from "../NoteCard/NoteCard";
+import { CreateNoteCard } from "../CreateNoteCard/CreateNoteCard";
 import { Search } from "../Search/Search";
+import { useState } from "react";
+import { DisplayNotesCard } from "../DisplayNotesCard/DisplayNotesCard";
+import { useNotesDataContext } from "../../contexts/notesDataContext";
+import { useShowNoteContext } from "../../contexts/showNotesContext";
+import { DisplayNotesCardModal } from "../DisplayNotesCardModal/DisplayNotesCardModal";
 const HomeMain = () => {
+  const [isCreateNewNote, setIsCreateNewNote] = useState(false);
+  const { notesData } = useNotesDataContext();
+  const { setShowNote } = useShowNoteContext();
+  const pinNote = (note, setNotesData) => {
+    setNotesData((notesData) => {
+      return {
+        ...notesData,
+        notes: notesData.notes.map((item) => {
+          if (JSON.stringify(note) === JSON.stringify(item)) {
+            return { ...item, isPinned: !item.isPinned };
+          }
+          return item;
+        }),
+      };
+    });
+  };
+  console.log(notesData.notes);
   return (
     <div className="home-main">
-      <SideBar />
+      <SideBar setIsCreateNewNote={setIsCreateNewNote} />
       <div className="main ">
         <Search />
+        <CreateNoteCard
+          isCreateNewNote={isCreateNewNote}
+          setIsCreateNewNote={setIsCreateNewNote}
+        />
+        <DisplayNotesCardModal />
+        <h3 className="text-align">Your Notes</h3>
 
-        <NoteCard />
         <section>
-          <h3>Your Notes</h3>
-          <NoteCard />
-          <NoteCard />
+          {notesData.notes.map(
+            (note) =>
+              !note.isPinned && (
+                <DisplayNotesCard
+                  key={note.id}
+                  note={note}
+                  setShowNote={setShowNote}
+                  pinNote={pinNote}
+                />
+              )
+          )}
         </section>
       </div>
-      <div className="right-sidebar ">
+      <div className="right-sidebar  ">
         <h3>Pinned Notes</h3>
-        <NoteCard pinned={true} />
-        <NoteCard pinned={true} />
-        <NoteCard pinned={true} />
-        <NoteCard pinned={true} />
+        {notesData.notes.map(
+          (note) =>
+            note.isPinned && (
+              <DisplayNotesCard
+                key={note.id}
+                note={note}
+                setShowNote={setShowNote}
+                pinNote={pinNote}
+              />
+            )
+        )}
       </div>
     </div>
   );

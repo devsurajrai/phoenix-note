@@ -1,7 +1,30 @@
+/* note card container  */
+.note-card-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity:50%;
+    filter:blur(50px);
+    left: 0;
+    top:0;
+    z-index: 99;
+}
+.note-card-modal{
+    top:22vh;
+    right:18vw;
+    box-shadow: 1px 1px 5px 2px whitesmoke;
+    border-radius:1rem;
+    z-index: 100;
+}
 /* Note Card  */
 .note-card{
     background-color: white;
-    width:35vw;
+    margin-top: 0;
+    height: 60vh;
+    width: 60vw;
 }
 /* Note Iput fields  */
 .note-card__textarea,.note-card__heading{
@@ -9,7 +32,7 @@ border: none;
 padding:1rem;
 }
 .note-card__textarea{
-    height:10rem;
+    height:40rem;
     resize:none;
 }
 .note-card__heading:focus{
@@ -23,7 +46,7 @@ padding:1rem;
      align-items:center
  }
 .note-card__footer--icons{
-    width:15rem
+    width:6rem
 }
 .note-card__footer--date{
     color:grey;

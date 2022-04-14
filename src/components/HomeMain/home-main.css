@@ -5,7 +5,13 @@ overflow:hidden;
 }
 .main{
     overflow-y:scroll;
+    height:calc(100vh - 8rem)
 }
+.main::-webkit-scrollbar {
+    display: none;
+  }
 .right-sidebar{
     overflow-y:scroll;
+    height:calc(100vh - 8rem)
+
 }
