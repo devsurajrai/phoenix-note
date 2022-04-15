@@ -119,8 +119,12 @@ export const SignUpMain = () => {
               Show Password
             </span>
           </label>
-
-          <button className="button button--secondary log-in-btn m-tb-md">
+          <button
+            className="button button--secondary log-in-btn m-tb-md"
+            onClick={(e) =>
+              createUser(e, signUpLoginValidationState, setAuth, navigate)
+            }
+          >
             Sign Up
           </button>
           <Link to="/login" className=" text-sm">

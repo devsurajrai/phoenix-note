@@ -77,7 +77,18 @@ const LoginMain = () => {
           </label>
         </label>
 
-        <button className="button button--secondary log-in-btn m-tb-md">
+        <button
+          className="button button--secondary log-in-btn m-tb-md"
+          onClick={() =>
+            loginUser(
+              e,
+              signUpLoginValidationState,
+              location,
+              navigate,
+              setAuth
+            )
+          }
+        >
           LOG IN
         </button>
         <Link to="/signup">
