@@ -3,7 +3,7 @@ import { useShowNoteContext } from "../../contexts/showNotesContext";
 import "./display-notes-card.css";
 
 const DisplayNotesCard = ({ note, setShowNote, pinNote }) => {
-  const { heading, body, isPinned } = note;
+  const { heading, body, isPinned, id } = note;
   const { notesData, setNotesData } = useNotesDataContext();
 
   console.log(notesData);
@@ -43,13 +43,16 @@ const DisplayNotesCard = ({ note, setShowNote, pinNote }) => {
             <i className="fa-solid fa-box-archive display-notes-card-icon"></i>
             <i className="fa-solid fa-trash display-notes-card-icon"></i>
           </div>
-          <button className="button button-secondary btn-sm m-l-md ">
+          <button
+            className="button button-secondary btn-sm m-l-md
+          "
+          >
             Edit Note
           </button>
         </div>
         <i
-          className="card-pin-icon fa-solid fa-map-pin "
-          onClick={() => pinNote(note, setNotesData)}
+          className="card-pin-icon fa-solid fa-map-pin"
+          onClick={() => pinNote(note, setNotesData, id)}
         ></i>
       </div>
     </div>

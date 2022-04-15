@@ -8,7 +8,6 @@ export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
   const { setNotesData } = useNotesDataContext();
 
   const [note, setNote] = useState({
-    id: "",
     heading: "",
     body: "",
     isPinned: false,
@@ -55,7 +54,7 @@ export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
                   <button
                     className="button button-secondary btn-sm m-l-md "
                     onClick={() =>
-                      addNote(setNotesData, setIsCreateNewNote, note)
+                      addNote(setNotesData, setIsCreateNewNote, note, uuidv4)
                     }
                   >
                     Add Note

@@ -62,3 +62,6 @@ padding:1rem;
      width:20vw;
      margin:1rem;
  }
+ .pinned-card .card-pin-icon{
+    color:var(--secondary)
+ }

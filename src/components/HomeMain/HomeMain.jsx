@@ -11,7 +11,7 @@ const HomeMain = () => {
   const [isCreateNewNote, setIsCreateNewNote] = useState(false);
   const { notesData } = useNotesDataContext();
   const { setShowNote } = useShowNoteContext();
-  const pinNote = (note, setNotesData) => {
+  const pinNote = (note, setNotesData, id) => {
     setNotesData((notesData) => {
       return {
         ...notesData,
