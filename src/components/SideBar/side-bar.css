@@ -1,0 +1,18 @@
+.notes-sidebar{
+    height:100vh
+}
+.notes-sidebar__list{
+    width:100%;
+
+}
+.sidebar-item{
+    display:flex;
+    align-items:center;
+}
+.sidebar-item span{
+    letter-spacing:3px;
+}
+.sidebar-btn-userinfo{
+   justify-content:space-between;
+   height:calc(100vh - 46rem);
+}

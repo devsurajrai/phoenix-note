@@ -1,28 +1,72 @@
 import "./home-main.css";
-import HomepageSVG from "../../Assets/SVG/homepage.svg";
-import { Link } from "react-router-dom";
-
-export const HomeMain = () => {
+import { SideBar } from "../SideBar/SideBar";
+import { CreateNoteCard } from "../CreateNoteCard/CreateNoteCard";
+import { Search } from "../Search/Search";
+import { useState } from "react";
+import { DisplayNotesCard } from "../DisplayNotesCard/DisplayNotesCard";
+import { useNotesDataContext } from "../../contexts/notesDataContext";
+import { useShowNoteContext } from "../../contexts/showNotesContext";
+import { DisplayNotesCardModal } from "../DisplayNotesCardModal/DisplayNotesCardModal";
+const HomeMain = () => {
+  const [isCreateNewNote, setIsCreateNewNote] = useState(false);
+  const { notesData } = useNotesDataContext();
+  const { setShowNote } = useShowNoteContext();
+  const pinNote = (note, setNotesData, id) => {
+    setNotesData((notesData) => {
+      return {
+        ...notesData,
+        notes: notesData.notes.map((item) => {
+          if (JSON.stringify(note) === JSON.stringify(item)) {
+            return { ...item, isPinned: !item.isPinned };
+          }
+          return item;
+        }),
+      };
+    });
+  };
+  console.log(notesData.notes);
   return (
-    <div className="home-main flex-r flex-center">
-      <div className="home-main__child flex-r flex-center p-lr-md">
-        <div className="home-main__child--heading m-l-xxl ">
-          <h1>Phoenix Note</h1>
-          <h1>Says Hello.</h1>
-          <p>
-            Phoenix Note provides you all the tools needed to plan your day
-            better 😌.
-          </p>
-          <Link to="/signup">
-            <button className="button button--primary btn-l ">
-              Get Started
-            </button>
-          </Link>
-        </div>
-        <div className="m-r-xxl">
-          <img className="res-img " src={HomepageSVG} alt="notebook" />
-        </div>
+    <div className="home-main">
+      <SideBar setIsCreateNewNote={setIsCreateNewNote} />
+      <div className="main ">
+        <Search />
+        <CreateNoteCard
+          isCreateNewNote={isCreateNewNote}
+          setIsCreateNewNote={setIsCreateNewNote}
+        />
+        <DisplayNotesCardModal />
+        <h3 className="text-align">Your Notes</h3>
+
+        <section>
+          {notesData.notes.map(
+            (note) =>
+              !note.isPinned && (
+                <DisplayNotesCard
+                  key={note.id}
+                  note={note}
+                  setShowNote={setShowNote}
+                  pinNote={pinNote}
+                />
+              )
+          )}
+        </section>
+      </div>
+      <div className="right-sidebar  ">
+        <h3>Pinned Notes</h3>
+        {notesData.notes.map(
+          (note) =>
+            note.isPinned && (
+              <DisplayNotesCard
+                key={note.id}
+                note={note}
+                setShowNote={setShowNote}
+                pinNote={pinNote}
+              />
+            )
+        )}
       </div>
     </div>
   );
 };
+
+export { HomeMain };

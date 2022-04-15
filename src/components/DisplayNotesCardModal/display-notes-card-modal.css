@@ -1,0 +1,80 @@
+/* note card container  */
+.note-card-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    opacity:50%;
+    filter:blur(50px);
+    left: 0;
+    top:0;
+    z-index: 99;
+}
+.display-note-card-modal{
+    top:22vh;
+    right:20vw;
+    box-shadow: 1px 1px 5px 2px whitesmoke;
+    border-radius:1rem;
+    z-index: 100;
+}
+
+/* Display Note Card  */
+.display-notes-card-modal{
+    cursor:pointer;
+    background-color: white;
+    margin-top: 0;
+    height: 60vh;
+    width: 60vw;
+}
+/* N\display note card body  */
+.display-notes-card-modal__body,.display-notes-card__heading{
+padding:1rem;
+}
+.display-notes-card-modal__body{
+    height:35rem;
+    overflow:scroll;
+    width:49vw;
+}
+.display-notes-card__body--content{
+    margin:0;
+    width:80%
+}
+
+/* display notes card footer  */
+.icons-container{
+    width:30rem;
+    margin-left:auto;
+}
+.display-notes-card__footer{
+    align-items:center
+
+}
+.display-notes-card__footer--icons{
+   width:15rem;
+   height:3rem;
+
+}
+.display-notes-card__footer--date{
+   color:grey;
+}
+.display-notes-card-icon:hover{
+  color:var(--primary);
+  cursor:pointer;
+
+}
+
+/* card pin icon  */
+.card-pin-icon{
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+}
+.card-pin-icon:hover{
+    color:var(--primary);
+    cursor:pointer;
+ }
+ .pinned-card{
+     width:20vw
+ }

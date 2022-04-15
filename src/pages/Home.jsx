@@ -1,3 +1,6 @@
+import React from "react";
 import { HomeMain } from "../components/components";
 
-export const Home = () => <HomeMain />;
+const Home = () => <HomeMain />;
+
+export { Home };
