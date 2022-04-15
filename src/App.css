@@ -8,3 +8,6 @@
   max-height: 100vh;
   overflow:hidden;
 }
+.button:hover {
+  opacity: 80%;
+}
