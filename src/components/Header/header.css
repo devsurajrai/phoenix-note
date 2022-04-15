@@ -1,0 +1,14 @@
+.header{
+    align-items: baseline;
+    box-shadow: 1px 5px 5px 2px var(--light-color);
+}
+.brand-name{
+text-shadow:unset;
+}
+.button{
+    background-color:var(--secondary)
+}
+.secondary-link:hover{
+border-bottom:2px solid var(--secondary);
+transition:all .2s ease;
+}
