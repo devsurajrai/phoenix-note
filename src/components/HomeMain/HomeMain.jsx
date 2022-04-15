@@ -2,6 +2,7 @@ import "./home-main.css";
 import { SideBar } from "../SideBar/SideBar";
 import { CreateNoteCard } from "../CreateNoteCard/CreateNoteCard";
 import { Search } from "../Search/Search";
+<<<<<<< HEAD
 import { useState } from "react";
 import { DisplayNotesCard } from "../DisplayNotesCard/DisplayNotesCard";
 import { useNotesDataContext } from "../../contexts/notesDataContext";
@@ -25,11 +26,18 @@ const HomeMain = () => {
     });
   };
   console.log(notesData.notes);
+=======
+import { useAuthContext } from "../../contexts/authContext";
+const HomeMain = () => {
+  const { auth } = useAuthContext();
+  console.log(auth);
+>>>>>>> origin/login-feature
   return (
     <div className="home-main">
       <SideBar setIsCreateNewNote={setIsCreateNewNote} />
       <div className="main ">
         <Search />
+<<<<<<< HEAD
         <CreateNoteCard
           isCreateNewNote={isCreateNewNote}
           setIsCreateNewNote={setIsCreateNewNote}
@@ -37,6 +45,9 @@ const HomeMain = () => {
         <DisplayNotesCardModal />
         <h3 className="text-align">Your Notes</h3>
 
+=======
+        <NoteCard />
+>>>>>>> origin/login-feature
         <section>
           {notesData.notes.map(
             (note) =>
