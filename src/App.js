@@ -1,8 +1,8 @@
 import "./App.css";
-import { Header, MockmanAPI } from "./components/components";
+import { Header, MockmanAPI, RequiresAuth } from "./components/components";
 import { LandingPage, Home, Login, SignUp } from "./pages/pages";
 import { Routes, Route } from "react-router-dom";
-import { DisplayNotesCardModal } from "./components/DisplayNotesCardModal/DisplayNotesCardModal";
+import { PublicRoute } from "./components/publicRoute/PublicRoute";
 
 const App = () => {
   return (
@@ -10,9 +10,33 @@ const App = () => {
       <Header />
       <Routes>
         <Route path="/" element={<LandingPage />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/signup" element={<SignUp />}></Route>
-        <Route path="/home" element={<Home />}></Route>
+
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <Login />
+            </PublicRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/signup"
+          element={
+            <PublicRoute>
+              <SignUp />
+            </PublicRoute>
+          }
+        ></Route>
+
+        <Route
+          path="/home"
+          element={
+            <RequiresAuth>
+              <Home />
+            </RequiresAuth>
+          }
+        ></Route>
         <Route path="/mockman" element={<MockmanAPI />}></Route>
       </Routes>
     </div>

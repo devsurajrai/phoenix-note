@@ -1,5 +1,5 @@
 import axios from "axios";
-
+import { setAuthState } from "../../util/setAuthState/setAuthState";
 export const signUpUser = (signUpLoginValidationState, setAuth) => {
   const { firstName, lastName, email, password } = signUpLoginValidationState;
   (async () => {
@@ -10,14 +10,10 @@ export const signUpUser = (signUpLoginValidationState, setAuth) => {
         email,
         password,
       });
-      // saving the userInfo in local storage for session persistance
-      localStorage.setItem(
-        "userData",
-        JSON.stringify({
-          userToken: signUpResponse.data.encodedToken,
-          userInfo: signUpResponse.data.createdUser,
-        })
-      );
+      // setting the auth to context and the local storage
+      let userToken = signUpResponse.data.encodedToken;
+      let userData = signUpResponse.data.createdUser;
+      setAuthState(setAuth, userToken, userData);
     } catch (error) {
       console.log("error creating the account", error);
     }
