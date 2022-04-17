@@ -4,27 +4,15 @@ import { CreateNoteCard } from "../CreateNoteCard/CreateNoteCard";
 import { Search } from "../Search/Search";
 import { useState } from "react";
 import { DisplayNotesCard } from "../DisplayNotesCard/DisplayNotesCard";
-import { useNotesDataContext } from "../../contexts/notesDataContext";
 import { useShowNoteContext } from "../../contexts/showNotesContext";
 import { DisplayNotesCardModal } from "../DisplayNotesCardModal/DisplayNotesCardModal";
+import { useAuthContext } from "../../contexts/authContext";
+
 const HomeMain = () => {
   const [isCreateNewNote, setIsCreateNewNote] = useState(false);
-  const { notesData } = useNotesDataContext();
+  const { auth } = useAuthContext();
   const { setShowNote } = useShowNoteContext();
-  const pinNote = (note, setNotesData, id) => {
-    setNotesData((notesData) => {
-      return {
-        ...notesData,
-        notes: notesData.notes.map((item) => {
-          if (JSON.stringify(note) === JSON.stringify(item)) {
-            return { ...item, isPinned: !item.isPinned };
-          }
-          return item;
-        }),
-      };
-    });
-  };
-  console.log(notesData.notes);
+
   return (
     <div className="home-main">
       <SideBar setIsCreateNewNote={setIsCreateNewNote} />
@@ -38,14 +26,13 @@ const HomeMain = () => {
         <h3 className="text-align">Your Notes</h3>
 
         <section>
-          {notesData.notes.map(
+          {auth.notes.map(
             (note) =>
               !note.isPinned && (
                 <DisplayNotesCard
-                  key={note.id}
+                  key={note._id}
                   note={note}
                   setShowNote={setShowNote}
-                  pinNote={pinNote}
                 />
               )
           )}
@@ -53,14 +40,13 @@ const HomeMain = () => {
       </div>
       <div className="right-sidebar  ">
         <h3>Pinned Notes</h3>
-        {notesData.notes.map(
+        {auth.notes.map(
           (note) =>
             note.isPinned && (
               <DisplayNotesCard
-                key={note.id}
+                key={note._id}
                 note={note}
                 setShowNote={setShowNote}
-                pinNote={pinNote}
               />
             )
         )}

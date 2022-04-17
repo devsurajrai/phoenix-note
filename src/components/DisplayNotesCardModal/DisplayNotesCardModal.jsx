@@ -22,9 +22,9 @@ export const DisplayNotesCardModal = () => {
               <div className="display-notes-card-modal__heading text-md br-md">
                 <h2 className="p-b-xs">{showNote.heading}</h2>
               </div>
-              <div className="display-notes-card-modal__body br-md text-sm">
+              <div className="display-notes-card-modal__body br-md text-sm m-r-md">
                 <p
-                  style={{ width: "80%" }}
+                  style={{ width: "96%" }}
                   className="display-notes-card__body--content"
                 >
                   {showNote.body}

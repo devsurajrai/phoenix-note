@@ -2,10 +2,11 @@ import { signUpUser } from "../../backendUtil/backendUtil";
 export const createUser = (
   e,
   signUpLoginValidationState,
-  setAuth,
+  authDispatch,
+  auth,
   navigate
 ) => {
   e.preventDefault();
-  signUpUser(signUpLoginValidationState, setAuth);
+  signUpUser(signUpLoginValidationState, authDispatch, auth);
   navigate("/home");
 };

@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useNotesDataContext } from "../../contexts/notesDataContext";
+// import { useNotesDataContext } from "../../contexts/notesDataContext";
 import "./create-note-card.css";
 import { v4 as uuidv4 } from "uuid";
-import { addNote } from "../../util/addNote/addNote";
+
+import { useAuthContext } from "../../contexts/authContext";
+import { addNote } from "../../util/util";
 
 export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
-  const { setNotesData } = useNotesDataContext();
-
+  const { userToken, authDispatch } = useAuthContext();
   const [note, setNote] = useState({
     heading: "",
     body: "",
@@ -54,7 +55,7 @@ export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
                   <button
                     className="button button-secondary btn-sm m-l-md "
                     onClick={() =>
-                      addNote(setNotesData, setIsCreateNewNote, note, uuidv4)
+                      addNote(note, setIsCreateNewNote, userToken, authDispatch)
                     }
                   >
                     Add Note

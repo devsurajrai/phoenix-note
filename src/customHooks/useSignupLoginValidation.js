@@ -4,8 +4,8 @@ const useSignupLoginValidation = () => {
   const SIGNUP_LOGIN_FORM_VALIDATION_INITIAL = {
     firstName: "",
     lastName: "",
-    email: "",
-    password: "",
+    email: "devsurajrai@gmail.com",
+    password: "123",
     isPassHidden: true,
     isTermsCondChecked: false,
   };

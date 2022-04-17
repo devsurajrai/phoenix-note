@@ -1,23 +1,21 @@
 import { createContext, useContext, useState } from "react";
+import { useEffect } from "react";
+import { useAuthState } from "../customHooks/customHooks";
+import { setAuthState } from "../util/setAuthState/setAuthState";
 
 const AuthContext = createContext({});
 
 const useAuthContext = () => useContext(AuthContext);
 
 const AuthContextProvider = ({ children }) => {
-  const localStorageData = JSON.parse(localStorage.getItem("userData"));
-  const token = localStorageData?.userToken;
-  const isLoggedIn = token ? true : false;
-  const userData = localStorageData?.userData;
-
-  const [auth, setAuth] = useState({
-    isLoggedIn,
-    token,
-    userData,
-  });
-
+  const userToken = localStorage.getItem("token");
+  const { auth, authDispatch } = useAuthState();
+  useEffect(() => {
+    userToken && setAuthState(authDispatch, auth, userToken);
+  }, []);
+  console.log(auth);
   return (
-    <AuthContext.Provider value={{ auth, setAuth }}>
+    <AuthContext.Provider value={{ auth, authDispatch, userToken }}>
       {children}
     </AuthContext.Provider>
   );

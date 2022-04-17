@@ -15,6 +15,7 @@ import {
   getAllNotesHandler,
   updateNoteHandler,
 } from "./backend/controllers/NotesController";
+import { getUserHandler } from "./backend/controllers/userController";
 import { users } from "./backend/db/users";
 
 export function makeServer({ environment = "development" } = {}) {
@@ -45,6 +46,7 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
+      this.get("/auth/user", getUserHandler.bind(this));
 
       // notes routes (private)
       this.get("/notes", getAllNotesHandler.bind(this));

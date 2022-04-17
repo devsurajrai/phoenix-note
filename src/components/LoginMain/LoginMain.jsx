@@ -12,10 +12,10 @@ const LoginMain = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const passInputType = useShowPassword();
-  const { setAuth } = useAuthContext();
+  const { auth, authDispatch } = useAuthContext();
 
   return (
-    <main class="login-main">
+    <main className="login-main">
       <form
         className="log-in-form p-xxl flex-c flex-center br-sm"
         onSubmit={(e) =>
@@ -23,7 +23,7 @@ const LoginMain = () => {
         }
       >
         <h3>Login</h3>
-        <label className="text-sm lh-md login-label" for="username">
+        <label className="text-sm lh-md login-label" htmlFor="username">
           Email
           <input
             className="input-simple br-l m-b-md"
@@ -36,11 +36,12 @@ const LoginMain = () => {
                 payload: { value: e.target.value },
               })
             }
+            value={signUpLoginValidationState.email}
             required
           />
         </label>
 
-        <label className=" text-sm lh-md login-label" for="password">
+        <label className=" text-sm lh-md login-label" htmlFor="password">
           Password
           <input
             className="input-simple br-l m-b-s"
@@ -53,19 +54,20 @@ const LoginMain = () => {
                 payload: { value: e.target.value },
               })
             }
+            value={signUpLoginValidationState.password}
             required
           />
         </label>
 
         <label className=" text-sm lh-md login-label flex-r flex-sb">
           <label className="flex-r flex-center">
-            <input className="input-checkbox m-r-s" type="checkbox" />
+            <input className="input-checkbox m-r-s" type="checkbox" required />
             <span className="text-sm m-r-xl">Keep me logged in</span>
           </label>
           <label>
             <span
               className="button btn-sm show-pass-btn"
-              onClick={(e) =>
+              onClick={() =>
                 signUpLoginValidationDispatch({
                   type: "SET_HIDE_PASS",
                   payload: { value: !signUpLoginValidationState.isPassHidden },
@@ -79,13 +81,14 @@ const LoginMain = () => {
 
         <button
           className="button button--secondary log-in-btn m-tb-md"
-          onClick={() =>
+          onClick={(e) =>
             loginUser(
               e,
               signUpLoginValidationState,
               location,
               navigate,
-              setAuth
+              authDispatch,
+              auth
             )
           }
         >

@@ -1,12 +1,14 @@
-import { useNotesDataContext } from "../../contexts/notesDataContext";
+// import { useNotesDataContext } from "../../contexts/notesDataContext";
+import { useAuthContext } from "../../contexts/authContext";
 import { useShowNoteContext } from "../../contexts/showNotesContext";
+import { pinNote } from "../../util/util";
 import "./display-notes-card.css";
 
-const DisplayNotesCard = ({ note, setShowNote, pinNote }) => {
-  const { heading, body, isPinned, id } = note;
-  const { notesData, setNotesData } = useNotesDataContext();
+const DisplayNotesCard = ({ note, setShowNote }) => {
+  const { heading, body, isPinned, _id } = note;
+  // const { notesData, setNotesData } = useNotesDataContext();
+  const { auth, authDispatch, userToken } = useAuthContext();
 
-  console.log(notesData);
   return (
     <div
       className={`${
@@ -26,7 +28,12 @@ const DisplayNotesCard = ({ note, setShowNote, pinNote }) => {
           <h2 className="p-b-xs">{heading}</h2>
         </div>
         <div className="display-notes-card__body br-md text-sm">
-          <p className="display-notes-card__body--content">{body}</p>
+          <p
+            style={{ width: "96%" }}
+            className="display-notes-card__body--content"
+          >
+            {body}
+          </p>
         </div>
       </div>
 
@@ -52,7 +59,7 @@ const DisplayNotesCard = ({ note, setShowNote, pinNote }) => {
         </div>
         <i
           className="card-pin-icon fa-solid fa-map-pin"
-          onClick={() => pinNote(note, setNotesData, id)}
+          onClick={() => pinNote(auth.notes, authDispatch, _id, userToken)}
         ></i>
       </div>
     </div>
