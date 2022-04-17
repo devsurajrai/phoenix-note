@@ -13,7 +13,7 @@ const createNote = async (note, userToken) => {
     console.log("error creating the note", error);
   }
 };
-const updateNote = async (note, userToken, id) => {
+const updateNotes = async (note, userToken, id) => {
   let config = {
     headers: {
       authorization: userToken,
@@ -32,4 +32,4 @@ const updateNote = async (note, userToken, id) => {
   }
 };
 
-export { createNote, updateNote };
+export { createNote, updateNotes };

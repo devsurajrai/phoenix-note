@@ -1,27 +1,28 @@
-import { useState } from "react";
-// import { useNotesDataContext } from "../../contexts/notesDataContext";
 import "./create-note-card.css";
-import { v4 as uuidv4 } from "uuid";
 
 import { useAuthContext } from "../../contexts/authContext";
-import { addNote } from "../../util/util";
+import { addNote, updateNote } from "../../util/util";
+import { useNoteContext } from "../../contexts/noteContext";
 
-export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
-  const { userToken, authDispatch } = useAuthContext();
-  const [note, setNote] = useState({
-    heading: "",
-    body: "",
-    isPinned: false,
-  });
+export const CreateNoteCard = ({
+  isCreateNewNote,
+  setIsCreateNewNote,
+  isEditing,
+  setIsEditing,
+}) => {
+  const { auth, userToken, authDispatch } = useAuthContext();
+  const { note, setNote } = useNoteContext();
   return (
     <>
       {isCreateNewNote && (
         <div>
           <div
             className="note-card-container position-a"
-            onClick={() =>
-              setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote)
-            }
+            onClick={() => {
+              setNote({ id: "", heading: "", body: "", isPinned: false });
+              setIsEditing(false);
+              setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
+            }}
           ></div>
           <div className="note-card-modal position-a">
             <div className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r">
@@ -29,16 +30,19 @@ export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
                 className="note-card__heading text-md br-md"
                 type="text"
                 placeholder="Enter Heading"
-                onBlur={(e) =>
+                onChange={(e) =>
                   setNote((note) => ({ ...note, heading: e.target.value }))
                 }
+                value={note.heading}
+                autoFocus={true}
               />
               <textarea
                 className="note-card__textarea br-md"
                 placeholder="Start writing your note here ..."
-                onBlur={(e) =>
+                onChange={(e) =>
                   setNote((note) => ({ ...note, body: e.target.value }))
                 }
+                value={note.body}
               ></textarea>
               <div className="note-card__footer flex-r flex-sb">
                 <span className="  note-card__footer--date text-sm">
@@ -52,14 +56,41 @@ export const CreateNoteCard = ({ isCreateNewNote, setIsCreateNewNote }) => {
                     {/* <i className="fa-solid fa-box-archive note-card-icon"></i>
                     <i className="fa-solid fa-trash note-card-icon"></i> */}
                   </div>
-                  <button
-                    className="button button-secondary btn-sm m-l-md "
-                    onClick={() =>
-                      addNote(note, setIsCreateNewNote, userToken, authDispatch)
-                    }
-                  >
-                    Add Note
-                  </button>
+
+                  {!isEditing && (
+                    <button
+                      className="button button-secondary btn-sm m-l-md "
+                      onClick={() =>
+                        addNote(
+                          note,
+                          setIsCreateNewNote,
+                          userToken,
+                          authDispatch,
+                          setNote
+                        )
+                      }
+                    >
+                      Add Note
+                    </button>
+                  )}
+                  {isEditing && (
+                    <button
+                      className="button button-secondary btn-sm m-l-md "
+                      onClick={() =>
+                        updateNote(
+                          note,
+                          setIsCreateNewNote,
+                          userToken,
+                          authDispatch,
+                          setNote,
+                          auth.notes,
+                          setIsEditing
+                        )
+                      }
+                    >
+                      Update Note
+                    </button>
+                  )}
                 </div>
               </div>
             </div>

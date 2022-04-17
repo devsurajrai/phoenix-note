@@ -1,4 +1,4 @@
-import { updateNote } from "../../backendUtil/backendUtil";
+import { updateNotes } from "../../backendUtil/backendUtil";
 
 export const pinNote = (notes, authDispatch, noteId, userToken) => {
   let noteToUpdate = {};
@@ -7,19 +7,7 @@ export const pinNote = (notes, authDispatch, noteId, userToken) => {
       noteToUpdate = { ...note, isPinned: !note.isPinned };
   }
   (async () => {
-    const updatedNote = await updateNote(noteToUpdate, userToken, noteId);
+    const updatedNote = await updateNotes(noteToUpdate, userToken, noteId);
     authDispatch({ type: "SET_NOTES", payload: { value: updatedNote } });
   })();
-
-  //   setNotesData((notesData) => {
-  //     return {
-  //       ...notesData,
-  //       notes: notesData.notes.map((item) => {
-  //         if (JSON.stringify(note) === JSON.stringify(item)) {
-  //           return { ...item, isPinned: !item.isPinned };
-  //         }
-  //         return item;
-  //       }),
-  //     };
-  //   });
 };
