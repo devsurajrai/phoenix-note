@@ -1,7 +1,10 @@
-export const addNote = (setNotesData, setIsCreateNewNote, note, uuidv4) => {
-  setNotesData((notesData) => ({
-    ...notesData,
-    notes: [{ ...note, id: uuidv4() }, ...notesData.notes],
-  }));
+import { createNote } from "../../backendUtil/backendUtil";
+
+export const addNote = (note, setIsCreateNewNote, userToken, authDispatch) => {
+  (async () => {
+    const updatedNotes = await createNote(note, userToken);
+    console.log(updatedNotes);
+    authDispatch({ type: "SET_NOTES", payload: { value: updatedNotes } });
+  })();
   setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
 };

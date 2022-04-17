@@ -36,7 +36,11 @@ padding:1rem;
     height:35rem;
     overflow:scroll;
     width:49vw;
+    width:100%
 }
+.display-notes-card-modal__body::-webkit-scrollbar {
+    display: none;
+  }
 .display-notes-card__body--content{
     margin:0;
     width:80%

@@ -10,7 +10,7 @@ export const SignUpMain = () => {
   const { signUpLoginValidationState, signUpLoginValidationDispatch } =
     useSignUpLoginValidateContext();
   const passInputType = useShowPassword();
-  const { setAuth } = useAuthContext();
+  const { auth, authDispatch } = useAuthContext();
   const navigate = useNavigate();
 
   return (
@@ -23,7 +23,7 @@ export const SignUpMain = () => {
           }
         >
           <h3>Signup</h3>
-          <label className="text-sm lh-md login-label" for="firstName">
+          <label className="text-sm lh-md login-label" htmlFor="firstName">
             First Name
             <input
               className="input-simple br-l m-b-md"
@@ -39,7 +39,7 @@ export const SignUpMain = () => {
               }
             />
           </label>
-          <label className="text-sm lh-md login-label" for="lastName">
+          <label className="text-sm lh-md login-label" htmlFor="lastName">
             Last Name
             <input
               className="input-simple br-l m-b-md"
@@ -55,7 +55,7 @@ export const SignUpMain = () => {
               }
             />
           </label>
-          <label className="text-sm lh-md login-label" for="username">
+          <label className="text-sm lh-md login-label" htmlFor="username">
             Email
             <input
               className="input-simple br-l m-b-md"
@@ -72,7 +72,7 @@ export const SignUpMain = () => {
             />
           </label>
 
-          <label className=" text-sm lh-md login-label" for="password">
+          <label className=" text-sm lh-md login-label" htmlFor="password">
             Password
             <input
               className="input-simple br-l m-b-s"
@@ -88,10 +88,7 @@ export const SignUpMain = () => {
               required
             />
           </label>
-          <label
-            className=" text-sm lh-md login-label flex-r flex-center"
-            for=""
-          >
+          <label className=" text-sm lh-md login-label flex-r flex-center">
             <input
               className="input-checkbox m-r-s"
               type="checkbox"
@@ -122,7 +119,13 @@ export const SignUpMain = () => {
           <button
             className="button button--secondary log-in-btn m-tb-md"
             onClick={(e) =>
-              createUser(e, signUpLoginValidationState, setAuth, navigate)
+              createUser(
+                e,
+                signUpLoginValidationState,
+                authDispatch,
+                auth,
+                navigate
+              )
             }
           >
             Sign Up

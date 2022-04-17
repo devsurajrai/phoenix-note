@@ -1,6 +1,6 @@
 import axios from "axios";
 import { setAuthState } from "../../util/setAuthState/setAuthState";
-export const signUpUser = (signUpLoginValidationState, setAuth) => {
+export const signUpUser = (signUpLoginValidationState, authDispatch, auth) => {
   const { firstName, lastName, email, password } = signUpLoginValidationState;
   (async () => {
     try {
@@ -12,8 +12,8 @@ export const signUpUser = (signUpLoginValidationState, setAuth) => {
       });
       // setting the auth to context and the local storage
       let userToken = signUpResponse.data.encodedToken;
-      let userData = signUpResponse.data.createdUser;
-      setAuthState(setAuth, userToken, userData);
+
+      setAuthState(authDispatch, auth, userToken);
     } catch (error) {
       console.log("error creating the account", error);
     }

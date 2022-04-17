@@ -1,3 +1,4 @@
+import { useAuthContext } from "../../contexts/authContext";
 import { NOTES_SIDEBAR_LIST_ITEMS } from "../../data/sidebarItems";
 import { LoggedInUserInfo } from "./LoggedInUserInfo/LoggedInUserInfo";
 import "./side-bar.css";
@@ -5,6 +6,9 @@ import "./side-bar.css";
 import { SidebarItem } from "./SidebarItem/SidebarItem";
 
 const SideBar = ({ setIsCreateNewNote }) => {
+  const { auth } = useAuthContext();
+  const { firstName, lastName } = auth.userInfo;
+  console.log(auth);
   return (
     <div className="notes-sidebar p-r-xxl">
       <ul className="notes-sidebar__list p-r-xl">
@@ -28,8 +32,8 @@ const SideBar = ({ setIsCreateNewNote }) => {
           userInfo={{
             profileIMG:
               "https://lh3.googleusercontent.com/a-/AOh14Gi1hHx-lQVI3s5YEbxDBAraiXNdBtd9-gC7MYxM=s288-p-rw-no",
-            name: "Suraj Rai",
-            userID: "devsurajrai",
+            name: `${firstName} ${lastName}`,
+            userID: `${firstName}${lastName}`,
           }}
         />
       </div>

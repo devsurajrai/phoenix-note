@@ -15,11 +15,10 @@ padding:1rem;
 .display-notes-card__body{
     max-height:2vh;
     overflow:hidden;
-    width:49vw;
+    width:100%;
 }
 #display-notes-card__body--content{
-    margin:0;
-    width:80%
+margin:0;
 }
 
 

@@ -5,7 +5,6 @@ import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
 
-import { NotesDataContextProvider } from "./contexts/notesDataContext";
 import { ShowNoteContextProvider } from "./contexts/showNotesContext";
 import { SignUpLoginValidateContextProvider } from "./contexts/signUpLoginValidationContext";
 import { AuthContextProvider } from "../src/contexts/authContext";
@@ -15,17 +14,15 @@ makeServer();
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <NotesDataContextProvider>
-        <SignUpLoginValidateContextProvider>
-          <ShowNoteContextProvider>
-            <AuthContextProvider>
-              <SignUpLoginValidateContextProvider>
-                <App />
-              </SignUpLoginValidateContextProvider>
-            </AuthContextProvider>
-          </ShowNoteContextProvider>
-        </SignUpLoginValidateContextProvider>
-      </NotesDataContextProvider>
+      <SignUpLoginValidateContextProvider>
+        <ShowNoteContextProvider>
+          <AuthContextProvider>
+            <SignUpLoginValidateContextProvider>
+              <App />
+            </SignUpLoginValidateContextProvider>
+          </AuthContextProvider>
+        </ShowNoteContextProvider>
+      </SignUpLoginValidateContextProvider>
     </Router>
   </React.StrictMode>,
   document.getElementById("root")
