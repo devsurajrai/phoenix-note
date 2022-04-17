@@ -12,7 +12,8 @@ const HomeMain = () => {
   const [isCreateNewNote, setIsCreateNewNote] = useState(false);
   const { auth } = useAuthContext();
   const { setShowNote } = useShowNoteContext();
-
+  const [isEditing, setIsEditing] = useState(false);
+  console.log(auth);
   return (
     <div className="home-main">
       <SideBar setIsCreateNewNote={setIsCreateNewNote} />
@@ -21,6 +22,8 @@ const HomeMain = () => {
         <CreateNoteCard
           isCreateNewNote={isCreateNewNote}
           setIsCreateNewNote={setIsCreateNewNote}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
         />
         <DisplayNotesCardModal />
         <h3 className="text-align">Your Notes</h3>
@@ -33,6 +36,8 @@ const HomeMain = () => {
                   key={note._id}
                   note={note}
                   setShowNote={setShowNote}
+                  setIsCreateNewNote={setIsCreateNewNote}
+                  setIsEditing={setIsEditing}
                 />
               )
           )}
@@ -47,6 +52,8 @@ const HomeMain = () => {
                 key={note._id}
                 note={note}
                 setShowNote={setShowNote}
+                setIsCreateNewNote={setIsCreateNewNote}
+                setIsEditing={setIsEditing}
               />
             )
         )}

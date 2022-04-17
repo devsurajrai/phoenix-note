@@ -1,13 +1,19 @@
 // import { useNotesDataContext } from "../../contexts/notesDataContext";
 import { useAuthContext } from "../../contexts/authContext";
+import { useNoteContext } from "../../contexts/noteContext";
 import { useShowNoteContext } from "../../contexts/showNotesContext";
-import { pinNote } from "../../util/util";
+import { editNote, pinNote } from "../../util/util";
 import "./display-notes-card.css";
 
-const DisplayNotesCard = ({ note, setShowNote }) => {
+const DisplayNotesCard = ({
+  note,
+  setShowNote,
+  setIsCreateNewNote,
+  setIsEditing,
+}) => {
   const { heading, body, isPinned, _id } = note;
-  // const { notesData, setNotesData } = useNotesDataContext();
   const { auth, authDispatch, userToken } = useAuthContext();
+  const { setNote } = useNoteContext();
 
   return (
     <div
@@ -53,6 +59,17 @@ const DisplayNotesCard = ({ note, setShowNote }) => {
           <button
             className="button button-secondary btn-sm m-l-md
           "
+            onClick={() =>
+              editNote(
+                auth.notes,
+                authDispatch,
+                _id,
+                userToken,
+                setNote,
+                setIsCreateNewNote,
+                setIsEditing
+              )
+            }
           >
             Edit Note
           </button>

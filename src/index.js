@@ -8,6 +8,7 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { ShowNoteContextProvider } from "./contexts/showNotesContext";
 import { SignUpLoginValidateContextProvider } from "./contexts/signUpLoginValidationContext";
 import { AuthContextProvider } from "../src/contexts/authContext";
+import { NoteContextProvider } from "./contexts/noteContext";
 // Call make Server
 makeServer();
 
@@ -18,7 +19,9 @@ ReactDOM.render(
         <ShowNoteContextProvider>
           <AuthContextProvider>
             <SignUpLoginValidateContextProvider>
-              <App />
+              <NoteContextProvider>
+                <App />
+              </NoteContextProvider>
             </SignUpLoginValidateContextProvider>
           </AuthContextProvider>
         </ShowNoteContextProvider>
