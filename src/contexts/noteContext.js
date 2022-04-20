@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react";
-
+import { getDate } from "../util/util";
 const NoteContext = createContext({});
 
 const useNoteContext = () => useContext(NoteContext);
@@ -10,6 +10,8 @@ const NoteContextProvider = ({ children }) => {
     heading: "",
     body: "",
     isPinned: false,
+    color: "",
+    createdAt: getDate(),
   });
 
   return (

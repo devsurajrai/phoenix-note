@@ -9,6 +9,8 @@ import { ShowNoteContextProvider } from "./contexts/showNotesContext";
 import { SignUpLoginValidateContextProvider } from "./contexts/signUpLoginValidationContext";
 import { AuthContextProvider } from "../src/contexts/authContext";
 import { NoteContextProvider } from "./contexts/noteContext";
+import { ColorContextProvider } from "./contexts/colorContext";
+
 // Call make Server
 makeServer();
 
@@ -20,7 +22,9 @@ ReactDOM.render(
           <AuthContextProvider>
             <SignUpLoginValidateContextProvider>
               <NoteContextProvider>
-                <App />
+                <ColorContextProvider>
+                  <App />
+                </ColorContextProvider>
               </NoteContextProvider>
             </SignUpLoginValidateContextProvider>
           </AuthContextProvider>
