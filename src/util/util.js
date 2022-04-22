@@ -4,3 +4,4 @@ export { addNote } from "./addNote/addNote";
 export { pinNote } from "./pinNote/pinNote";
 export { editNote } from "./editNote/editNote";
 export { updateNote } from "./updateNote/updateNote";
+export { getDate } from "./getDate/getDate";

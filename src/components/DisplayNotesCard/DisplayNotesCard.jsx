@@ -11,12 +11,13 @@ const DisplayNotesCard = ({
   setIsCreateNewNote,
   setIsEditing,
 }) => {
-  const { heading, body, isPinned, _id } = note;
+  const { heading, body, isPinned, _id, color, createdAt } = note;
   const { auth, authDispatch, userToken } = useAuthContext();
   const { setNote } = useNoteContext();
 
   return (
     <div
+      style={{ backgroundColor: `${color}` }}
       className={`${
         isPinned && "pinned-card"
       } display-notes-card flex-c flex-sb  p-t-md m-t-xl p-md br-md position-r m-md`}
@@ -46,7 +47,7 @@ const DisplayNotesCard = ({
       <div className="display-notes-card__footer m-t-md flex-r ">
         {!isPinned && (
           <span className="  display-notes-card__footer--date text-sm">
-            Created on 07/04/2022
+            Created on {createdAt}
           </span>
         )}
         <div className=" icons-container flex-r ">

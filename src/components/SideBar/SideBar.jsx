@@ -1,4 +1,5 @@
 import { useAuthContext } from "../../contexts/authContext";
+import { useColorContext } from "../../contexts/colorContext";
 import { NOTES_SIDEBAR_LIST_ITEMS } from "../../data/sidebarItems";
 import { LoggedInUserInfo } from "./LoggedInUserInfo/LoggedInUserInfo";
 import "./side-bar.css";
@@ -8,6 +9,8 @@ import { SidebarItem } from "./SidebarItem/SidebarItem";
 const SideBar = ({ setIsCreateNewNote }) => {
   const { auth } = useAuthContext();
   const { firstName, lastName } = auth.userInfo;
+  const { setCardColor } = useColorContext();
+
   console.log(auth);
   return (
     <div className="notes-sidebar p-r-xxl">
@@ -22,9 +25,10 @@ const SideBar = ({ setIsCreateNewNote }) => {
       <div className="sidebar-btn-userinfo flex-c">
         <button
           className="button button-secondary no-br p-xs w-p-full m-l-xl "
-          onClick={() =>
-            setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote)
-          }
+          onClick={() => {
+            setCardColor("");
+            setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
+          }}
         >
           Create New Note
         </button>
