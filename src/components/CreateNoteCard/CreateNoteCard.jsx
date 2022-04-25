@@ -4,7 +4,8 @@ import { useAuthContext } from "../../contexts/authContext";
 import { addNote, updateNote } from "../../util/util";
 import { useNoteContext } from "../../contexts/noteContext";
 import { useColorContext } from "../../contexts/colorContext";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Tag } from "../components";
 
 export const CreateNoteCard = ({
   isCreateNewNote,
@@ -14,11 +15,20 @@ export const CreateNoteCard = ({
 }) => {
   const { userToken, authDispatch } = useAuthContext();
   const { note, setNote } = useNoteContext();
-  const { cardColor, setCardColor, randomColor } = useColorContext();
+  const { cardColor, setCardColor, randomColor, tagsColor, setTagsColor } =
+    useColorContext();
+  const [tagName, setTagName] = useState("");
   useEffect(() => {
     setNote((note) => ({ ...note, color: cardColor }));
   }, [cardColor]);
-
+  useEffect(() => {
+    if (tagName !== " " && tagName !== "")
+      setNote((note) => ({
+        ...note,
+        tags: [[tagName.slice(0, tagName.length - 1), tagsColor], ...note.tags],
+      }));
+  }, [tagsColor]);
+  console.log([tagName]);
   return (
     <>
       {isCreateNewNote && (
@@ -36,6 +46,17 @@ export const CreateNoteCard = ({
               style={{ backgroundColor: `${note.color}` }}
               className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r"
             >
+              <div className="tags p-l-xs">
+                {note.tags.map((tagInfo) => {
+                  return (
+                    <Tag
+                      key={tagInfo}
+                      tagName={tagInfo[0]}
+                      tagColor={tagInfo[1]}
+                    />
+                  );
+                })}
+              </div>
               <input
                 style={{ backgroundColor: `${note.color}` }}
                 className="note-card__heading text-md br-md"
@@ -59,6 +80,20 @@ export const CreateNoteCard = ({
                 }
                 value={note.body}
               ></textarea>
+              <input
+                style={{ backgroundColor: `${note.color}` }}
+                className="note-card__heading text-sm br-md"
+                type="text"
+                placeholder="Enter Tag"
+                onKeyUp={(e) => {
+                  if (e.keyCode === 32) {
+                    setTagsColor(randomColor);
+                    setTagName(e.target.value);
+                    e.target.value = "";
+                  }
+                }}
+                autoFocus={true}
+              />
               <div className="note-card__footer flex-r flex-sb">
                 <span className="  note-card__footer--date text-sm">
                   Created on {note.createdAt}

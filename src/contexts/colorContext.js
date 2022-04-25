@@ -11,8 +11,11 @@ const ColorContextProvider = ({ children }) => {
   const randomColor = COLORS[randomIndex];
 
   const [cardColor, setCardColor] = useState("");
+  const [tagsColor, setTagsColor] = useState("");
   return (
-    <ColorContext.Provider value={{ cardColor, setCardColor, randomColor }}>
+    <ColorContext.Provider
+      value={{ cardColor, setCardColor, tagsColor, setTagsColor, randomColor }}
+    >
       {children}
     </ColorContext.Provider>
   );

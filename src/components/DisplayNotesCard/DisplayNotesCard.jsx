@@ -3,6 +3,7 @@ import { useAuthContext } from "../../contexts/authContext";
 import { useNoteContext } from "../../contexts/noteContext";
 import { useShowNoteContext } from "../../contexts/showNotesContext";
 import { editNote, pinNote } from "../../util/util";
+import { Tag } from "../components";
 import "./display-notes-card.css";
 
 const DisplayNotesCard = ({
@@ -11,7 +12,7 @@ const DisplayNotesCard = ({
   setIsCreateNewNote,
   setIsEditing,
 }) => {
-  const { heading, body, isPinned, _id, color, createdAt } = note;
+  const { heading, body, isPinned, _id, color, createdAt, tags } = note;
   const { auth, authDispatch, userToken } = useAuthContext();
   const { setNote } = useNoteContext();
 
@@ -31,6 +32,13 @@ const DisplayNotesCard = ({
           }))
         }
       >
+        <div className="tags p-l-xs">
+          {note.tags.map((tagInfo) => {
+            return (
+              <Tag key={tagInfo} tagName={tagInfo[0]} tagColor={tagInfo[1]} />
+            );
+          })}
+        </div>
         <div className="display-notes-card__heading text-md br-md">
           <h2 className="p-b-xs">{heading}</h2>
         </div>

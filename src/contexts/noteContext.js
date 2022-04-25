@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-import { getDate } from "../util/util";
 const NoteContext = createContext({});
 
 const useNoteContext = () => useContext(NoteContext);
@@ -12,6 +11,7 @@ const NoteContextProvider = ({ children }) => {
     isPinned: false,
     color: "",
     createdAt: "",
+    tags: [],
   });
 
   return (
