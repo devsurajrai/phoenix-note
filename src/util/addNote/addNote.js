@@ -12,5 +12,5 @@ export const addNote = (
     authDispatch({ type: "SET_NOTES", payload: { value: updatedNotes } });
   })();
   setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
-  setNote({ heading: "", body: "", isPinned: false, color: "" });
+  setNote({ heading: "", body: "", isPinned: false, color: "", tags: [] });
 };
