@@ -1,7 +1,6 @@
 // import { useNotesDataContext } from "../../contexts/notesDataContext";
 import { useAuthContext } from "../../contexts/authContext";
 import { useNoteContext } from "../../contexts/noteContext";
-import { useShowNoteContext } from "../../contexts/showNotesContext";
 import { editNote, pinNote } from "../../util/util";
 import { Tag } from "../components";
 import "./display-notes-card.css";
@@ -71,9 +70,7 @@ const DisplayNotesCard = ({
             onClick={() =>
               editNote(
                 auth.notes,
-                authDispatch,
                 _id,
-                userToken,
                 setNote,
                 setIsCreateNewNote,
                 setIsEditing

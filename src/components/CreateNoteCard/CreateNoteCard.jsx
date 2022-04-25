@@ -18,6 +18,7 @@ export const CreateNoteCard = ({
   const { cardColor, setCardColor, randomColor, tagsColor, setTagsColor } =
     useColorContext();
   const [tagName, setTagName] = useState("");
+  const [isAddingTag, setIsAddingTag] = useState(false);
   useEffect(() => {
     setNote((note) => ({ ...note, color: cardColor }));
   }, [cardColor]);
@@ -36,9 +37,16 @@ export const CreateNoteCard = ({
           <div
             className="note-card-container position-a"
             onClick={() => {
-              setNote({ id: "", heading: "", body: "", isPinned: false });
+              setNote({
+                id: "",
+                heading: "",
+                body: "",
+                isPinned: false,
+                tags: [],
+              });
               setIsEditing(false);
               setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
+              setIsAddingTag(false);
             }}
           ></div>
           <div className="note-card-modal position-a">
@@ -80,20 +88,22 @@ export const CreateNoteCard = ({
                 }
                 value={note.body}
               ></textarea>
-              <input
-                style={{ backgroundColor: `${note.color}` }}
-                className="note-card__heading text-sm br-md"
-                type="text"
-                placeholder="Enter Tag"
-                onKeyUp={(e) => {
-                  if (e.keyCode === 32) {
-                    setTagsColor(randomColor);
-                    setTagName(e.target.value);
-                    e.target.value = "";
-                  }
-                }}
-                autoFocus={true}
-              />
+              {isAddingTag && (
+                <input
+                  style={{ backgroundColor: `${note.color}` }}
+                  className="note-card__heading text-sm br-md"
+                  type="text"
+                  placeholder="Enter Tag"
+                  onKeyUp={(e) => {
+                    if (e.keyCode === 32) {
+                      setTagsColor(randomColor);
+                      setTagName(e.target.value);
+                      e.target.value = "";
+                    }
+                  }}
+                  autoFocus={true}
+                />
+              )}
               <div className="note-card__footer flex-r flex-sb">
                 <span className="  note-card__footer--date text-sm">
                   Created on {note.createdAt}
@@ -107,7 +117,12 @@ export const CreateNoteCard = ({
                         setCardColor(randomColor);
                       }}
                     ></i>
-                    <i className="fa-solid fa-tag note-card-icon"></i>
+                    <i
+                      className="fa-solid fa-tag note-card-icon"
+                      onClick={() =>
+                        setIsAddingTag((isAddingTag) => !isAddingTag)
+                      }
+                    ></i>
                     {/* comented for future use  */}
                     {/* <i className="fa-solid fa-box-archive note-card-icon"></i>
                     <i className="fa-solid fa-trash note-card-icon"></i> */}
@@ -123,7 +138,8 @@ export const CreateNoteCard = ({
                           userToken,
                           authDispatch,
                           setNote,
-                          setCardColor
+                          setCardColor,
+                          setIsAddingTag
                         );
                       }}
                     >
@@ -141,7 +157,7 @@ export const CreateNoteCard = ({
                           authDispatch,
                           setNote,
                           setIsEditing,
-                          setCardColor
+                          setIsAddingTag
                         )
                       }
                     >
