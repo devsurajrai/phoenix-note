@@ -11,7 +11,7 @@ const NoteContextProvider = ({ children }) => {
     body: "",
     isPinned: false,
     color: "",
-    createdAt: getDate(),
+    createdAt: "",
   });
 
   return (

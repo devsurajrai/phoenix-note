@@ -18,6 +18,7 @@ export const CreateNoteCard = ({
   useEffect(() => {
     setNote((note) => ({ ...note, color: cardColor }));
   }, [cardColor]);
+
   return (
     <>
       {isCreateNewNote && (
@@ -32,11 +33,11 @@ export const CreateNoteCard = ({
           ></div>
           <div className="note-card-modal position-a">
             <div
-              style={{ backgroundColor: `${cardColor}` }}
+              style={{ backgroundColor: `${note.color}` }}
               className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r"
             >
               <input
-                style={{ backgroundColor: `${cardColor}` }}
+                style={{ backgroundColor: `${note.color}` }}
                 className="note-card__heading text-md br-md"
                 type="text"
                 placeholder="Enter Heading"
@@ -44,14 +45,13 @@ export const CreateNoteCard = ({
                   setNote((note) => ({
                     ...note,
                     heading: e.target.value,
-                    color: cardColor,
                   }));
                 }}
                 value={note.heading}
                 autoFocus={true}
               />
               <textarea
-                style={{ backgroundColor: `${cardColor}` }}
+                style={{ backgroundColor: `${note.color}` }}
                 className="note-card__textarea br-md"
                 placeholder="Start writing your note here ..."
                 onChange={(e) =>
@@ -87,7 +87,8 @@ export const CreateNoteCard = ({
                           setIsCreateNewNote,
                           userToken,
                           authDispatch,
-                          setNote
+                          setNote,
+                          setCardColor
                         );
                       }}
                     >
@@ -104,7 +105,8 @@ export const CreateNoteCard = ({
                           userToken,
                           authDispatch,
                           setNote,
-                          setIsEditing
+                          setIsEditing,
+                          setCardColor
                         )
                       }
                     >
