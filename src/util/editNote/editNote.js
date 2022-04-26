@@ -1,8 +1,6 @@
 export const editNote = (
   notes,
-  authDispatch,
   noteId,
-  userToken,
   setNote,
   setIsCreateNewNote,
   setIsEditing
@@ -17,6 +15,7 @@ export const editNote = (
         isPinned: note.isPinned,
         createdAt: note.createdAt,
         color: note.color,
+        tags: note.tags,
       });
     }
   }

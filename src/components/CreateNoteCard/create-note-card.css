@@ -70,3 +70,8 @@ padding:1rem;
  .pinned-card{
      width:20vw
  }
+
+ /* Note Tags  */
+ .tags{
+     font-size: 1.5rem;
+ }
