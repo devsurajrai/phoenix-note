@@ -69,6 +69,7 @@ export const createNoteHandler = function (schema, request) {
  * */
 
 export const deleteNoteHandler = function (schema, request) {
+  debugger;
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -80,7 +81,8 @@ export const deleteNoteHandler = function (schema, request) {
         }
       );
     }
-    const noteId = request.params.noteId;
+    const { noteId } = request.params;
+    console.log("noteid", noteId);
     user.notes = user.notes.filter((item) => item._id !== noteId);
     this.db.users.update({ _id: user._id }, user);
     return new Response(200, {}, { notes: user.notes });

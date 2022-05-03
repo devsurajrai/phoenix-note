@@ -29,7 +29,6 @@ export const CreateNoteCard = ({
         tags: [[tagName.slice(0, tagName.length - 1), tagsColor], ...note.tags],
       }));
   }, [tagsColor]);
-  console.log([tagName]);
   return (
     <>
       {isCreateNewNote && (

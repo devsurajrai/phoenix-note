@@ -1,6 +1,7 @@
 // import { useNotesDataContext } from "../../contexts/notesDataContext";
 import { useAuthContext } from "../../contexts/authContext";
 import { useNoteContext } from "../../contexts/noteContext";
+import { deleteNote } from "../../util/deleteNote/deleteNote";
 import { editNote, pinNote } from "../../util/util";
 import { Tag } from "../components";
 import "./display-notes-card.css";
@@ -32,7 +33,7 @@ const DisplayNotesCard = ({
         }
       >
         <div className="tags p-l-xs">
-          {note.tags.map((tagInfo) => {
+          {tags.map((tagInfo) => {
             return (
               <Tag key={tagInfo} tagName={tagInfo[0]} tagColor={tagInfo[1]} />
             );
@@ -62,7 +63,10 @@ const DisplayNotesCard = ({
             <i className="fa-solid fa-palette display-notes-card-icon"></i>
             <i className="fa-solid fa-tag display-notes-card-icon"></i>
             <i className="fa-solid fa-box-archive display-notes-card-icon"></i>
-            <i className="fa-solid fa-trash display-notes-card-icon"></i>
+            <i
+              className="fa-solid fa-trash display-notes-card-icon"
+              onClick={() => deleteNote(note, userToken, authDispatch)}
+            ></i>
           </div>
           <button
             className="button button-secondary btn-sm m-l-md

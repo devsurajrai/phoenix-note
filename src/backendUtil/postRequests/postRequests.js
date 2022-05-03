@@ -7,7 +7,6 @@ const createNote = async (note, userToken) => {
   };
   try {
     const updatedNotes = await axios.post("/api/notes", { note: note }, config);
-    console.log(updatedNotes.data.notes);
     return updatedNotes.data.notes;
   } catch (error) {
     console.log("error creating the note", error);
