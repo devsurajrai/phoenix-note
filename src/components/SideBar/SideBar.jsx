@@ -8,16 +8,15 @@ import "./side-bar.css";
 
 import { SidebarItem } from "./SidebarItem/SidebarItem";
 
-const SideBar = ({ setIsCreateNewNote }) => {
+const SideBar = ({ setIsCreateNewNote, archivePage }) => {
   const { auth } = useAuthContext();
   const { firstName, lastName } = auth.userInfo;
-  const { setCardColor } = useColorContext();
   const { setNote } = useNoteContext();
-
-  console.log(auth);
   return (
     <div className="notes-sidebar p-r-xxl">
-      <ul className="notes-sidebar__list p-r-xl">
+      <ul
+        className={`${archivePage && "padding-l-0"} notes-sidebar__list p-r-xl`}
+      >
         {NOTES_SIDEBAR_LIST_ITEMS.map((listItemDetails) => (
           <SidebarItem
             key={listItemDetails.id}
@@ -25,17 +24,23 @@ const SideBar = ({ setIsCreateNewNote }) => {
           />
         ))}
       </ul>
-      <div className="sidebar-btn-userinfo flex-c">
-        <button
-          className="button button-secondary no-br p-xs w-p-full m-l-xl "
-          onClick={() => {
-            setNote((note) => ({ ...note, createdAt: getDate() }));
-            setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
-          }}
-        >
-          Create New Note
-        </button>
+      <div
+        className="
+           sidebar-btn-userinfo flex-c"
+      >
+        {!archivePage && (
+          <button
+            className="button button-secondary no-br p-xs w-p-full m-l-xl "
+            onClick={() => {
+              setNote((note) => ({ ...note, createdAt: getDate() }));
+              setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
+            }}
+          >
+            Create New Note
+          </button>
+        )}
         <LoggedInUserInfo
+          archivePage={archivePage}
           userInfo={{
             profileIMG:
               "https://lh3.googleusercontent.com/a-/AOh14Gi1hHx-lQVI3s5YEbxDBAraiXNdBtd9-gC7MYxM=s288-p-rw-no",

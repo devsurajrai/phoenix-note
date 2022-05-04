@@ -11,7 +11,6 @@ export const login = (signUpLoginValidationState, authDispatch, auth) => {
         email,
         password,
       });
-      console.log(loginResponse);
       // setting the auth to context and the local storage
       const userToken = loginResponse.data.encodedToken;
       setAuthState(authDispatch, auth, userToken);

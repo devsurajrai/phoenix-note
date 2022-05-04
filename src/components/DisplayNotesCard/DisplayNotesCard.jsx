@@ -1,4 +1,9 @@
 // import { useNotesDataContext } from "../../contexts/notesDataContext";
+import {
+  archiveNote,
+  deleteArchiveNote,
+  restoreArchiveNote,
+} from "../../util/util";
 import { useAuthContext } from "../../contexts/authContext";
 import { useNoteContext } from "../../contexts/noteContext";
 import { deleteNote } from "../../util/deleteNote/deleteNote";
@@ -11,6 +16,7 @@ const DisplayNotesCard = ({
   setShowNote,
   setIsCreateNewNote,
   setIsEditing,
+  archivePage,
 }) => {
   const { heading, body, isPinned, _id, color, createdAt, tags } = note;
   const { auth, authDispatch, userToken } = useAuthContext();
@@ -59,35 +65,63 @@ const DisplayNotesCard = ({
           </span>
         )}
         <div className=" icons-container flex-r ">
-          <div className="display-notes-card__footer--icons flex-r flex-sb">
-            <i className="fa-solid fa-palette display-notes-card-icon"></i>
-            <i className="fa-solid fa-tag display-notes-card-icon"></i>
-            <i className="fa-solid fa-box-archive display-notes-card-icon"></i>
-            <i
-              className="fa-solid fa-trash display-notes-card-icon"
-              onClick={() => deleteNote(note, userToken, authDispatch)}
-            ></i>
-          </div>
-          <button
-            className="button button-secondary btn-sm m-l-md
-          "
-            onClick={() =>
-              editNote(
-                auth.notes,
-                _id,
-                setNote,
-                setIsCreateNewNote,
-                setIsEditing
-              )
-            }
+          <div
+            className={`${
+              archivePage ? "justify-c-flex-end" : "flex-sb"
+            } display-notes-card__footer--icons flex-r `}
           >
-            Edit Note
-          </button>
+            {!archivePage ? (
+              <>
+                <i className="fa-solid fa-palette display-notes-card-icon"></i>
+                <i className="fa-solid fa-tag display-notes-card-icon"></i>
+                <i
+                  className="fa-solid fa-box-archive display-notes-card-icon"
+                  onClick={() => archiveNote(note, userToken, authDispatch)}
+                ></i>
+                <i
+                  className="card-pin-icon fa-solid fa-map-pin"
+                  onClick={() =>
+                    pinNote(auth.notes, authDispatch, _id, userToken)
+                  }
+                ></i>
+                <i
+                  className="fa-solid fa-trash display-notes-card-icon"
+                  onClick={() => deleteNote(note, userToken, authDispatch)}
+                ></i>
+              </>
+            ) : (
+              <i
+                className="fa-solid fa-trash display-notes-card-icon"
+                onClick={() => deleteArchiveNote(note, userToken, authDispatch)}
+              ></i>
+            )}
+          </div>
+          {!archivePage ? (
+            <button
+              className="button button-secondary btn-sm m-l-md
+          "
+              onClick={() =>
+                editNote(
+                  auth.notes,
+                  _id,
+                  setNote,
+                  setIsCreateNewNote,
+                  setIsEditing
+                )
+              }
+            >
+              Edit Note
+            </button>
+          ) : (
+            <button
+              className="button button-secondary btn-sm m-l-md
+          "
+              onClick={() => restoreArchiveNote(note, userToken, authDispatch)}
+            >
+              Restore
+            </button>
+          )}
         </div>
-        <i
-          className="card-pin-icon fa-solid fa-map-pin"
-          onClick={() => pinNote(auth.notes, authDispatch, _id, userToken)}
-        ></i>
       </div>
     </div>
   );

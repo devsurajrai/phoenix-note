@@ -5,3 +5,6 @@ export { pinNote } from "./pinNote/pinNote";
 export { editNote } from "./editNote/editNote";
 export { updateNote } from "./updateNote/updateNote";
 export { getDate } from "./getDate/getDate";
+export { archiveNote } from "./archiveNote/archiveNote";
+export { restoreArchiveNote } from "./restoreArchiveNote/restoreArchiveNote";
+export { deleteArchiveNote } from "./deleteArchiveNote/deleteArchiveNote";
