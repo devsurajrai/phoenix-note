@@ -1,10 +1,8 @@
 
-
 /* Display Note Card  */
 .display-notes-card{
     background-color: white;
     margin-top: 0;
-    height: 22vh;
     width: 40vw;
     cursor:pointer;
 }
@@ -63,4 +61,8 @@ margin:0;
  }
  .pinned-card .card-pin-icon{
     color:var(--secondary)
+ }
+
+ .justify-c-flex-end{
+     justify-content: flex-end;
  }

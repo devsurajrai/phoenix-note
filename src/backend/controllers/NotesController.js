@@ -69,6 +69,7 @@ export const createNoteHandler = function (schema, request) {
  * */
 
 export const deleteNoteHandler = function (schema, request) {
+  debugger;
   const user = requiresAuth.call(this, request);
   try {
     if (!user) {
@@ -80,7 +81,8 @@ export const deleteNoteHandler = function (schema, request) {
         }
       );
     }
-    const noteId = request.params.noteId;
+    const { noteId } = request.params;
+    console.log("noteid", noteId);
     user.notes = user.notes.filter((item) => item._id !== noteId);
     this.db.users.update({ _id: user._id }, user);
     return new Response(200, {}, { notes: user.notes });
@@ -138,6 +140,8 @@ export const updateNoteHandler = function (schema, request) {
 
 export const archiveNoteHandler = function (schema, request) {
   const user = requiresAuth.call(this, request);
+  console.log("archive func", user);
+
   try {
     if (!user) {
       return new Response(
@@ -149,9 +153,9 @@ export const archiveNoteHandler = function (schema, request) {
       );
     }
     const { noteId } = request.params;
-    const archivedNote = user.notes.filter((note) => note._id === noteId)[0];
+    const { note } = JSON.parse(request.requestBody);
     user.notes = user.notes.filter((note) => note._id !== noteId);
-    user.archives.push({ ...archivedNote });
+    user.archives.push(note);
     this.db.users.update({ _id: user._id }, user);
     return new Response(
       201,

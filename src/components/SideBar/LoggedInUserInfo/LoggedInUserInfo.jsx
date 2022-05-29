@@ -1,10 +1,13 @@
 import "./logged-in-user-info.css";
-import React from "react";
 
-const LoggedInUserInfo = ({ userInfo }) => {
+const LoggedInUserInfo = ({ userInfo, archivePage }) => {
   const { profileIMG, name, userID } = userInfo;
   return (
-    <div className="user-info flex-r flex-center ">
+    <div
+      className={`${
+        archivePage && "archive-page-user-Info"
+      } user-info flex-r flex-center`}
+    >
       <div className="avatar av-s m-r-xs ">
         <img
           className="img-100 full-round"

@@ -46,10 +46,10 @@ export function makeServer({ environment = "development" } = {}) {
       // auth routes (public)
       this.post("/auth/signup", signupHandler.bind(this));
       this.post("/auth/login", loginHandler.bind(this));
-      this.get("/auth/user", getUserHandler.bind(this));
 
       // notes routes (private)
       this.get("/notes", getAllNotesHandler.bind(this));
+      this.get("/auth/user", getUserHandler.bind(this));
       this.post("/notes", createNoteHandler.bind(this));
       this.post("/notes/:noteId", updateNoteHandler.bind(this));
       this.delete("/notes/:noteId", deleteNoteHandler.bind(this));
