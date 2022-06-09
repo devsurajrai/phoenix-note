@@ -4,9 +4,10 @@ const LoggedInUserInfo = ({ userInfo, archivePage }) => {
   const { profileIMG, name, userID } = userInfo;
   return (
     <div
-      className={`${
-        archivePage && "archive-page-user-Info"
-      } user-info flex-r flex-center`}
+      // className={`${
+      //   archivePage && "archive-page-user-Info"
+      // } user-info flex-r flex-center`}
+      className="archive-page-user-Info user-info flex-r flex-center"
     >
       <div className="avatar av-s m-r-xs ">
         <img
@@ -19,7 +20,7 @@ const LoggedInUserInfo = ({ userInfo, archivePage }) => {
         <span className="text-sm">{name}</span>
         <span className="text-sm">@{userID}</span>
       </div>
-      <i className="fa-solid fa-arrow-right-from-bracket "></i>
+      <i className="fa-solid fa-arrow-right-from-bracket logout-icon"></i>
     </div>
   );
 };

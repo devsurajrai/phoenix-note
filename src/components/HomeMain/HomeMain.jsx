@@ -7,18 +7,24 @@ import { DisplayNotesCard } from "../DisplayNotesCard/DisplayNotesCard";
 import { useShowNoteContext } from "../../contexts/showNotesContext";
 import { DisplayNotesCardModal } from "../DisplayNotesCardModal/DisplayNotesCardModal";
 import { useAuthContext } from "../../contexts/authContext";
+import { SortFilter } from "./SortFilter/SortFilter";
+import {getFilteredSortedNotes} from '../../util/sortFilter/sortFiltercompose.js'
+import { useSortFilterContext } from "../../contexts/sortFilterContext";
 
 const HomeMain = () => {
   const [isCreateNewNote, setIsCreateNewNote] = useState(false);
   const { auth } = useAuthContext();
   const { setShowNote } = useShowNoteContext();
+  const {sortFilterState}=useSortFilterContext()
+  const sortedFilteredNotes=getFilteredSortedNotes(auth.notes,sortFilterState)
   const [isEditing, setIsEditing] = useState(false);
-  console.log(auth);
+console.log("sorted filtered notes",sortedFilteredNotes,"sort filter state",sortFilterState,auth.notes);
   return (
     <div className="home-main">
       <SideBar setIsCreateNewNote={setIsCreateNewNote} />
       <div className="main ">
         <Search />
+        <SortFilter />
         <CreateNoteCard
           isCreateNewNote={isCreateNewNote}
           setIsCreateNewNote={setIsCreateNewNote}
@@ -29,7 +35,7 @@ const HomeMain = () => {
         <h3 className="text-align">Your Notes</h3>
 
         <section>
-          {auth.notes.map(
+          {sortedFilteredNotes&&sortedFilteredNotes.map(
             (note) =>
               !note.isPinned && (
                 <DisplayNotesCard

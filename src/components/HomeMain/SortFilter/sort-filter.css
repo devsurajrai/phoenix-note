@@ -1,0 +1,29 @@
+.sort-filter-container{
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    padding:1rem;
+    border-radius:5px;
+    margin:5px;
+}
+/* sort-filter button  */
+.sort-filter-btn{
+    border:none;
+    padding:0px;
+    margin:5px;
+    color:var(--secondary);
+    transition:all ease .2s;
+    background-color:transparent
+}
+.sort-filter-btn:hover{
+    border-bottom:1px solid var(--secondary);
+    cursor:pointer;
+}
+
+/* sorting/filtetring div  */
+.sorting,.filtering{
+    background-color:white;
+    padding:2rem;
+    border-radius:1rem;
+}
+

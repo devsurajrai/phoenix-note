@@ -71,6 +71,7 @@ export const loginHandler = function (schema, request) {
       );
     }
     if (password === foundUser.password) {
+      console.log("env",process.env.REACT_APP_JWT_SECRET);
       const encodedToken = sign(
         { _id: foundUser._id, email },
         process.env.REACT_APP_JWT_SECRET

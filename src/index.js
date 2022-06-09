@@ -5,19 +5,21 @@ import App from "./App";
 import { makeServer } from "./server";
 import { BrowserRouter as Router } from "react-router-dom";
 
+
 import { ShowNoteContextProvider } from "./contexts/showNotesContext";
 import { SignUpLoginValidateContextProvider } from "./contexts/signUpLoginValidationContext";
 import { AuthContextProvider } from "../src/contexts/authContext";
 import { NoteContextProvider } from "./contexts/noteContext";
 import { ColorContextProvider } from "./contexts/colorContext";
-
+import {SortFilterContextProvider} from './contexts/sortFilterContext'
 // Call make Server
 makeServer();
 
 ReactDOM.render(
   <React.StrictMode>
     <Router>
-      <SignUpLoginValidateContextProvider>
+    <SortFilterContextProvider>
+    <SignUpLoginValidateContextProvider>
         <ShowNoteContextProvider>
           <AuthContextProvider>
             <SignUpLoginValidateContextProvider>
@@ -30,6 +32,8 @@ ReactDOM.render(
           </AuthContextProvider>
         </ShowNoteContextProvider>
       </SignUpLoginValidateContextProvider>
+    </SortFilterContextProvider>
+
     </Router>
   </React.StrictMode>,
   document.getElementById("root")

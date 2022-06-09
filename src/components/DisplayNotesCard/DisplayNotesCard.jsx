@@ -18,7 +18,7 @@ const DisplayNotesCard = ({
   setIsEditing,
   archivePage,
 }) => {
-  const { heading, body, isPinned, _id, color, createdAt, tags } = note;
+  const { heading, body, isPinned, _id, color, createdAt, tags,priority } = note;
   const { auth, authDispatch, userToken } = useAuthContext();
   const { setNote } = useNoteContext();
 
@@ -39,9 +39,9 @@ const DisplayNotesCard = ({
         }
       >
         <div className="tags p-l-xs">
-          {tags.map((tagInfo) => {
+          {tags.map((tagName) => {
             return (
-              <Tag key={tagInfo} tagName={tagInfo[0]} tagColor={tagInfo[1]} />
+              <Tag key={tagName} tagName={tagName}  />
             );
           })}
         </div>
@@ -68,24 +68,27 @@ const DisplayNotesCard = ({
           <div
             className={`${
               archivePage ? "justify-c-flex-end" : "flex-sb"
-            } display-notes-card__footer--icons flex-r `}
+            }  flex-r `}
           >
             {!archivePage ? (
               <>
-                <i className="fa-solid fa-palette display-notes-card-icon"></i>
-                <i className="fa-solid fa-tag display-notes-card-icon"></i>
+              <div className="text-sm">
+
+              <Tag key={priority} tagName={priority}  />
+              </div>
+
                 <i
-                  className="fa-solid fa-box-archive display-notes-card-icon"
+                  className="fa-solid fa-box-archive display-notes-card-icon p-lr-xs"
                   onClick={() => archiveNote(note, userToken, authDispatch)}
                 ></i>
                 <i
-                  className="card-pin-icon fa-solid fa-map-pin"
+                  className="card-pin-icon fa-solid fa-map-pin p-lr-xs"
                   onClick={() =>
                     pinNote(auth.notes, authDispatch, _id, userToken)
                   }
                 ></i>
                 <i
-                  className="fa-solid fa-trash display-notes-card-icon"
+                  className="fa-solid fa-trash display-notes-card-icon p-lr-xs"
                   onClick={() => deleteNote(note, userToken, authDispatch)}
                 ></i>
               </>

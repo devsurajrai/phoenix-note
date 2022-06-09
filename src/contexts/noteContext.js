@@ -12,6 +12,7 @@ const NoteContextProvider = ({ children }) => {
     color: "",
     createdAt: "",
     tags: [],
+    priority:"high"
   });
 
   return (

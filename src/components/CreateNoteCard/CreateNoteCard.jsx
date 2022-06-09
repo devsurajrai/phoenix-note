@@ -7,6 +7,7 @@ import { useColorContext } from "../../contexts/colorContext";
 import { useEffect, useState } from "react";
 import { Tag } from "../components";
 
+
 export const CreateNoteCard = ({
   isCreateNewNote,
   setIsCreateNewNote,
@@ -15,7 +16,7 @@ export const CreateNoteCard = ({
 }) => {
   const { userToken, authDispatch } = useAuthContext();
   const { note, setNote } = useNoteContext();
-  const { cardColor, setCardColor, randomColor, tagsColor, setTagsColor } =
+  const { cardColor, setCardColor, randomColor, setTagsColor } =
     useColorContext();
   const [tagName, setTagName] = useState("");
   const [isAddingTag, setIsAddingTag] = useState(false);
@@ -26,9 +27,9 @@ export const CreateNoteCard = ({
     if (tagName !== " " && tagName !== "")
       setNote((note) => ({
         ...note,
-        tags: [[tagName.slice(0, tagName.length - 1), tagsColor], ...note.tags],
+        tags: [tagName.slice(0, tagName.length - 1), ...note.tags],
       }));
-  }, [tagsColor]);
+  }, [tagName]);
   return (
     <>
       {isCreateNewNote && (
@@ -54,12 +55,12 @@ export const CreateNoteCard = ({
               className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r"
             >
               <div className="tags p-l-xs">
-                {note.tags.map((tagInfo) => {
+                {note.tags.map((tagName) => {
+                  console.log(tagName)
                   return (
                     <Tag
-                      key={tagInfo}
-                      tagName={tagInfo[0]}
-                      tagColor={tagInfo[1]}
+                      key={tagName}
+                      tagName={tagName}
                     />
                   );
                 })}
@@ -109,9 +110,26 @@ export const CreateNoteCard = ({
                 </span>
 
                 <div className="flex-r flex-center">
-                  <div className="note-card__footer--icons flex-r flex-sb">
+                  <div className="note-card__footer--icons flex-r flex-sb  ">
+                  <select name="prioriry" value={note.priority}
+                   onChange={(e) => {
+                  setNote((note) => ({
+                    ...note,
+                    priority: e.target.value,
+                  }));
+                }}
+                  >
+  <option value="high"
+
+  >High</option>
+  <option value="medium"
+
+                >Medium</option>
+  <option value="low"
+  >Low</option>
+</select>
                     <i
-                      className="fa-solid fa-palette note-card-icon"
+                      className="fa-solid fa-palette note-card-icon p-lr-s"
                       onClick={() => {
                         setCardColor(randomColor);
                       }}
@@ -122,9 +140,7 @@ export const CreateNoteCard = ({
                         setIsAddingTag((isAddingTag) => !isAddingTag)
                       }
                     ></i>
-                    {/* comented for future use  */}
-                    {/* <i className="fa-solid fa-box-archive note-card-icon"></i>
-                    <i className="fa-solid fa-trash note-card-icon"></i> */}
+
                   </div>
 
                   {!isEditing && (

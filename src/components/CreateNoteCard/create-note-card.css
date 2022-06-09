@@ -45,9 +45,6 @@ padding:1rem;
  .note-card__footer{
      align-items:center
  }
-.note-card__footer--icons{
-    width:6rem
-}
 .note-card__footer--date{
     color:grey;
 }
