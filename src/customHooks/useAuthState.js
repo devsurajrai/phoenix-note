@@ -19,6 +19,8 @@ export const useAuthState = () => {
         return { ...authState, archives: value };
       case "SET_USER_INFO":
         return { ...authState, userInfo: value };
+      case "SET_TO_DEFAULT":
+        return { ...INITIAL_AUTH_STATE };
       default:
         return authState;
     }

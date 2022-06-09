@@ -20,7 +20,7 @@ const LoggedInUserInfo = ({ userInfo, archivePage }) => {
         <span className="text-sm">{name}</span>
         <span className="text-sm">@{userID}</span>
       </div>
-      <i className="fa-solid fa-arrow-right-from-bracket logout-icon"></i>
+      {/* <i className="fa-solid fa-arrow-right-from-bracket logout-icon"></i> */}
     </div>
   );
 };
