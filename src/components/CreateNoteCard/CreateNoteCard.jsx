@@ -3,6 +3,10 @@ import "./create-note-card.css";
 import { useAuthContext } from "../../contexts/authContext";
 import { addNote, updateNote } from "../../util/util";
 import { useNoteContext } from "../../contexts/noteContext";
+import { useColorContext } from "../../contexts/colorContext";
+import { useEffect, useState } from "react";
+import { Tag } from "../components";
+
 
 export const CreateNoteCard = ({
   isCreateNewNote,
@@ -10,8 +14,22 @@ export const CreateNoteCard = ({
   isEditing,
   setIsEditing,
 }) => {
-  const { auth, userToken, authDispatch } = useAuthContext();
+  const { userToken, authDispatch } = useAuthContext();
   const { note, setNote } = useNoteContext();
+  const { cardColor, setCardColor, randomColor, setTagsColor } =
+    useColorContext();
+  const [tagName, setTagName] = useState("");
+  const [isAddingTag, setIsAddingTag] = useState(false);
+  useEffect(() => {
+    setNote((note) => ({ ...note, color: cardColor }));
+  }, [cardColor]);
+  useEffect(() => {
+    if (tagName !== " " && tagName !== "")
+      setNote((note) => ({
+        ...note,
+        tags: [tagName.slice(0, tagName.length - 1), ...note.tags],
+      }));
+  }, [tagName]);
   return (
     <>
       {isCreateNewNote && (
@@ -19,24 +37,50 @@ export const CreateNoteCard = ({
           <div
             className="note-card-container position-a"
             onClick={() => {
-              setNote({ id: "", heading: "", body: "", isPinned: false });
+              setNote({
+                id: "",
+                heading: "",
+                body: "",
+                isPinned: false,
+                tags: [],
+              });
               setIsEditing(false);
               setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
+              setIsAddingTag(false);
             }}
           ></div>
           <div className="note-card-modal position-a">
-            <div className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r">
+            <div
+              style={{ backgroundColor: `${note.color}` }}
+              className="note-card  flex-c p-t-md m-t-xl p-md br-md position-r"
+            >
+              <div className="tags p-l-xs">
+                {note.tags.map((tagName) => {
+                  console.log(tagName)
+                  return (
+                    <Tag
+                      key={tagName}
+                      tagName={tagName}
+                    />
+                  );
+                })}
+              </div>
               <input
+                style={{ backgroundColor: `${note.color}` }}
                 className="note-card__heading text-md br-md"
                 type="text"
                 placeholder="Enter Heading"
-                onChange={(e) =>
-                  setNote((note) => ({ ...note, heading: e.target.value }))
-                }
+                onChange={(e) => {
+                  setNote((note) => ({
+                    ...note,
+                    heading: e.target.value,
+                  }));
+                }}
                 value={note.heading}
                 autoFocus={true}
               />
               <textarea
+                style={{ backgroundColor: `${note.color}` }}
                 className="note-card__textarea br-md"
                 placeholder="Start writing your note here ..."
                 onChange={(e) =>
@@ -44,31 +88,75 @@ export const CreateNoteCard = ({
                 }
                 value={note.body}
               ></textarea>
+              {isAddingTag && (
+                <input
+                  style={{ backgroundColor: `${note.color}` }}
+                  className="note-card__heading text-sm br-md"
+                  type="text"
+                  placeholder="Enter Tag"
+                  onKeyUp={(e) => {
+                    if (e.keyCode === 32) {
+                      setTagsColor(randomColor);
+                      setTagName(e.target.value);
+                      e.target.value = "";
+                    }
+                  }}
+                  autoFocus={true}
+                />
+              )}
               <div className="note-card__footer flex-r flex-sb">
                 <span className="  note-card__footer--date text-sm">
-                  Created on 07/04/2022
+                  Created on {note.createdAt}
                 </span>
+
                 <div className="flex-r flex-center">
-                  <div className="note-card__footer--icons flex-r flex-sb">
-                    <i className="fa-solid fa-palette note-card-icon"></i>
-                    <i className="fa-solid fa-tag note-card-icon"></i>
-                    {/* comented for future use  */}
-                    {/* <i className="fa-solid fa-box-archive note-card-icon"></i>
-                    <i className="fa-solid fa-trash note-card-icon"></i> */}
+                  <div className="note-card__footer--icons flex-r flex-sb  ">
+                  <select name="prioriry" value={note.priority}
+                   onChange={(e) => {
+                  setNote((note) => ({
+                    ...note,
+                    priority: e.target.value,
+                  }));
+                }}
+                  >
+  <option value="high"
+
+  >High</option>
+  <option value="medium"
+
+                >Medium</option>
+  <option value="low"
+  >Low</option>
+</select>
+                    <i
+                      className="fa-solid fa-palette note-card-icon p-lr-s"
+                      onClick={() => {
+                        setCardColor(randomColor);
+                      }}
+                    ></i>
+                    <i
+                      className="fa-solid fa-tag note-card-icon"
+                      onClick={() =>
+                        setIsAddingTag((isAddingTag) => !isAddingTag)
+                      }
+                    ></i>
+
                   </div>
 
                   {!isEditing && (
                     <button
                       className="button button-secondary btn-sm m-l-md "
-                      onClick={() =>
+                      onClick={() => {
                         addNote(
                           note,
                           setIsCreateNewNote,
                           userToken,
                           authDispatch,
-                          setNote
-                        )
-                      }
+                          setNote,
+                          setCardColor,
+                          setIsAddingTag
+                        );
+                      }}
                     >
                       Add Note
                     </button>
@@ -83,8 +171,8 @@ export const CreateNoteCard = ({
                           userToken,
                           authDispatch,
                           setNote,
-                          auth.notes,
-                          setIsEditing
+                          setIsEditing,
+                          setIsAddingTag
                         )
                       }
                     >

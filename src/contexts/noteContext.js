@@ -1,5 +1,4 @@
 import { createContext, useContext, useState } from "react";
-
 const NoteContext = createContext({});
 
 const useNoteContext = () => useContext(NoteContext);
@@ -10,6 +9,10 @@ const NoteContextProvider = ({ children }) => {
     heading: "",
     body: "",
     isPinned: false,
+    color: "",
+    createdAt: "",
+    tags: [],
+    priority:"high"
   });
 
   return (

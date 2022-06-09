@@ -6,3 +6,5 @@ export { SignUpMain } from "./SignUpMain/SignUpMain";
 export { MockmanAPI } from "./Mockman/MockmanAPI";
 export { RequiresAuth } from "./RequiresAuth/RequiresAuth";
 export { PublicRoute } from "./publicRoute/PublicRoute";
+export { Tag } from "./Tag/Tag";
+export { ArchiveMain } from "./ArchiveMain/ArchiveMain";

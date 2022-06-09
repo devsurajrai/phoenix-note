@@ -5,19 +5,15 @@ export const updateNote = (
   userToken,
   authDispatch,
   setNote,
-  notes,
-  setIsEditing
+  setIsEditing,
+  setIsAddingTag
 ) => {
-  let noteToUpdate = {};
-  for (let item of notes) {
-    if (item._id === note.id)
-      noteToUpdate = { ...item, heading: note.heading, body: note.body };
-  }
   (async () => {
-    const updatedNote = await updateNotes(noteToUpdate, userToken, note.id);
+    const updatedNote = await updateNotes(note, userToken, note.id);
     authDispatch({ type: "SET_NOTES", payload: { value: updatedNote } });
   })();
+  setIsAddingTag((isAddingTag) => !isAddingTag);
   setIsCreateNewNote((isCreateNewNote) => !isCreateNewNote);
-  setNote({ id: "", heading: "", body: "", isPinned: false });
+  setNote({ heading: "", body: "", isPinned: false, color: "", tags: [] });
   setIsEditing(false);
 };
